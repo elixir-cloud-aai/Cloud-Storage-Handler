@@ -1,17 +1,22 @@
+"""Module for integration tests."""
+
+import subprocess
+import time
+from http import HTTPStatus
+
 import pytest
 import requests
-import time
-import subprocess
-from http import HTTPStatus
 
 
 def start_server():
+    """Starts the server for testing."""
     process = subprocess.Popen(["python", "tus_storagehandler"])
     time.sleep(5)  # Give the server time to start
     return process
 
 
 def stop_server(process):
+    """Stops the server process."""
     process.terminate()
 
 
