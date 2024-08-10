@@ -26,10 +26,6 @@ version = "0.1.0"
 python = ">=3.11,<4.0"
 foca = "^0.13.0"
 connexion = "2.14.2"
-multipart = "^0.2.5"
-python-multipart = "^0.0.9"
-python-dotenv = "^1.0.1"
-pytest = "^8.3.2"
 requests = "^2.32.3"
 
 [tool.poetry.group.code_quality]
@@ -79,8 +75,13 @@ optional = true
 bandit = ">=1.7.8,<2.0.0"
 safety = ">=3.2.0,<4.0.0"
 
+
+[tool.poetry.group.dev.dependencies]
+sphinx = "^8.0.2"
+tomli = "^2.0.1"
+
 [tool.poetry.scripts]
-tus_storagehandler = "tus_storagehandler.main:main"
+tus_storagehandler = "tus_storagehandler.app:main"
 
 [tool.ruff]
 indent-width = 4
