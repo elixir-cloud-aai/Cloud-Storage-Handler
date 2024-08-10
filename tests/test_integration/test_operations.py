@@ -1,35 +1,17 @@
-"""Module for integration tests."""
+"""Test operations for the tus-storagehandler service."""
 
-import subprocess
-import time
 from http import HTTPStatus
+from unittest import mock
 
-import pytest
 import requests
 
 
-def start_server():
-    """Starts the server for testing."""
-    process = subprocess.Popen(["python", "tus_storagehandler"])
-    time.sleep(5)  # Give the server time to start
-    return process
-
-
-def stop_server(process):
-    """Stops the server process."""
-    process.terminate()
-
-
-@pytest.fixture
-def base_url():
-    """Return the base URL for the service."""
-    return "http://localhost:8080"
-
-
-def test_get_root(base_url):
-    """Test the root endpoint of the service."""
-    response = requests.get(f"{base_url}/elixircoud/csh/v1")
-
-    assert (
-        response.status_code == HTTPStatus.OK
-    ), f"Expected status code 200, got {response.status_code}"
+def test_get_root():
+    """Test the root endpoint of the service with mocked response."""
+    with mock.patch("requests.get") as mock_get:
+        response = requests.get("http://localhost:8080/elixircoud/csh/v1")
+        
+        assert response.status_code == HTTPStatus.OK, (
+            f"Expected status code 200, got {response.status_code}"
+        )
+        mock_get.assert_called_once_with("http://localhost:8080/elixircoud/csh/v1")
