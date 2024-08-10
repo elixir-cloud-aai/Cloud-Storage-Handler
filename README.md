@@ -18,6 +18,7 @@ File handler utilizing TUS and MinIO with DRS-Filer integration.
 - [Basic Usage](#basic-usage)
 - [Installation](#installation)
 - [Development](#development)
+- [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [Versioning](#versioning)
@@ -156,6 +157,14 @@ make u
 
 > **Note**: This is not the complete list of commands, run `make` to find out if
 > more have been added.
+
+## Environment Variables
+
+### `TUS_FOCA_CONFIG_PATH`
+
+- **Description:** Specifies the path to the configuration file for the FOCA app.
+- **Usage:** The FOCA app uses this environment variable to locate the configuration file. If not set, the app will use a default configuration path.
+- **Error Handling:** If the configuration file is not found at the specified path or the default path, a `FileNotFoundError` will be raised.
 
 ## Contributing
 
