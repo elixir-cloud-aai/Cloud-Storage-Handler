@@ -5,12 +5,9 @@ from unittest import mock
 
 import requests
 
-from http import HTTPStatus
-from unittest import mock
-import requests
-
 
 def test_get_root():
+    """Test the root endpoint of the service with a mocked response."""
     with mock.patch("requests.get") as mock_get:
         mock_response = mock.Mock()
         mock_response.status_code = HTTPStatus.OK
