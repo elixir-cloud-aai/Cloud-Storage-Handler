@@ -23,7 +23,7 @@ security:
 
 api:
     specs:
-        - path: storage_handler.yaml
+        - path: api\specs\specs.yaml
           append: null
           add_operation_fields:
               x-openapi-router-controller: tus_storagehandler.api.elixircloud.csh.controllers 

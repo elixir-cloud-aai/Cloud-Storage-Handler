@@ -6,7 +6,7 @@ from pathlib import Path
 
 from connexion import FlaskApp  # type: ignore
 from dotenv import load_dotenv  # type: ignore
-from foca import Foca
+from foca import Foca  # type: ignore
 
 load_dotenv()
 logger = logging.getLogger(__name__)
