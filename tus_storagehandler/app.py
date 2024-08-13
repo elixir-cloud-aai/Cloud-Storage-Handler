@@ -3,6 +3,7 @@
 import logging
 import os
 from pathlib import Path
+from typing import Optional
 
 from connexion import FlaskApp
 from foca import Foca
@@ -43,7 +44,7 @@ def init_app() -> FlaskApp:
     return foca.create_app()
 
 
-def main(env: str = None) -> None:
+def main(env: Optional[str] = None) -> None:
     """Run FOCA application.
 
     Args:
