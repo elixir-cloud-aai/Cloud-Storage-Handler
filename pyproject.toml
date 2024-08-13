@@ -25,8 +25,7 @@ version = "0.1.0"
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"
 foca = "^0.13.0"
-connexion = "2.14.2"
-requests = "^2.32.3"
+sphinx = "^8.0.2"
 
 [tool.poetry.group.code_quality]
 optional = true
@@ -37,7 +36,7 @@ ruff = ">=0.4.10"
 typos = ">=1.22.8"
 
 [tool.poetry.group.docs]
-optional = true
+optional = false
 
 [tool.poetry.group.docs.dependencies]
 added-value = ">=0.24.0"
@@ -74,11 +73,6 @@ optional = true
 [tool.poetry.group.vulnerability.dependencies]
 bandit = ">=1.7.8,<2.0.0"
 safety = ">=3.2.0,<4.0.0"
-
-
-[tool.poetry.group.dev.dependencies]
-sphinx = "^8.0.2"
-tomli = "^2.0.1"
 
 [tool.poetry.scripts]
 tus_storagehandler = "tus_storagehandler.app:main"

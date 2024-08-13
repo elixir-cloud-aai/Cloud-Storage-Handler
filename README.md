@@ -160,11 +160,10 @@ make u
 
 ## Environment Variables
 
-### `TUS_FOCA_CONFIG_PATH`
+| **Environment Variable**    | **Description**                                                                                     | **Usage**                                                                                                  | **Error Handling**                                                                                                         |
+|-----------------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `TUS_FOCA_CONFIG_PATH`       | Specifies the path to the configuration file for the FOCA app.                                      | The FOCA app uses this environment variable to locate the configuration file. If not set, it defaults.     | If the configuration file is not found at the specified or default path, a `FileNotFoundError` will be raised.             |
 
-- **Description:** Specifies the path to the configuration file for the FOCA app.
-- **Usage:** The FOCA app uses this environment variable to locate the configuration file. If not set, the app will use a default configuration path.
-- **Error Handling:** If the configuration file is not found at the specified path or the default path, a `FileNotFoundError` will be raised.
 
 ## Contributing
 
