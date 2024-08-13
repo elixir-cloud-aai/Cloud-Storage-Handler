@@ -4,8 +4,8 @@ import logging
 import os
 from pathlib import Path
 
-from connexion import FlaskApp  # type: ignore
-from foca import Foca  # type: ignore
+from connexion import FlaskApp
+from foca import Foca
 
 logger = logging.getLogger(__name__)
 

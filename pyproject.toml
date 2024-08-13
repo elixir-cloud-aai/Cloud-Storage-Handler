@@ -100,3 +100,10 @@ select = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[[tool.mypy.overrides]]
+module = [
+    "connexion.*",
+    "foca"
+]
+ignore_missing_imports = true
