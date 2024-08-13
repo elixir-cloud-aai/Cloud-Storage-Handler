@@ -43,11 +43,29 @@ def init_app() -> FlaskApp:
     return foca.create_app()
 
 
-def main() -> None:
-    """Run FOCA application."""
+def main(env: str = None) -> None:
+    """Run FOCA application.
+
+    Args:
+        env (str, optional): The environment in which to run the application.
+                             Defaults to 'prod' if not specified.
+    """
+    # Set default port
+    default_port = 8081
+
+    # Initialize application
     app = init_app()
-    app.run(port=app.port)
+
+    # Set environment and port
+    if env is None:
+        env = "prod"
+    port = app.port if env == "prod" else default_port
+
+    # Run the application
+    app.run(port=port)
 
 
 if __name__ == "__main__":
-    main()
+    # Get environment variable or default to 'dev'
+    environment = os.getenv("ENV", "dev")
+    main(environment)
