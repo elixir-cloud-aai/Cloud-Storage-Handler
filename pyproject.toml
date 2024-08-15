@@ -17,9 +17,9 @@ classifiers = [
 description = "File handler utilizing TUS and MinIO with DRS-Filer integration."
 license = "Apache-2.0"
 maintainers = ["ELIXIR Cloud AAI <cloud-service@elixir-europe.org>"]
-name = "tus_storagehandler"
+name = "Cloud-Storage-Handler"
 readme = "README.md"
-repository = "https://github.com/elixir-cloud-aai/tus-storagehandler"
+repository = "https://github.com/elixir-cloud-aai/Cloud-Storage-Handler"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
