@@ -1,19 +1,21 @@
 """API server entry point."""
 
-from enum import Enum
 import logging
 import os
+from enum import Enum
 from pathlib import Path
 from typing import Optional
 
+from connexion import FlaskApp
+from foca import Foca
+
 
 class Environment(Enum):
+    """Defines possible environments for the application."""
+
     DEV = "dev"
     PROD = "prod"
 
-
-from connexion import FlaskApp
-from foca import Foca
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +72,8 @@ def main(env: Optional[str] = None) -> None:
         env = Environment.DEV.value
     elif env not in [e.value for e in Environment]:
         raise ValueError(
-            f"Invalid environment: {env}. Must be one of {[e.value for e in Environment]}"
+            f"Invalid environment: {env}. Must be one of "
+            f"{[e.value for e in Environment]}"
         )
 
     port = app.port if env == Environment.DEV.value else default_port

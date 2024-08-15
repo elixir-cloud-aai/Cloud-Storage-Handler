@@ -1,7 +1,8 @@
 """Tus Storage Handler exceptions."""
 
-from werkzeug.exceptions import BadRequest, InternalServerError, NotFound
 from http import HTTPStatus
+
+from werkzeug.exceptions import BadRequest, InternalServerError, NotFound
 
 exceptions = {
     Exception: {
