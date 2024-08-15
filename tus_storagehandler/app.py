@@ -1,9 +1,16 @@
 """API server entry point."""
 
+from enum import Enum
 import logging
 import os
 from pathlib import Path
 from typing import Optional
+
+
+class Environment(Enum):
+    DEV = "dev"
+    PROD = "prod"
+
 
 from connexion import FlaskApp
 from foca import Foca
@@ -26,7 +33,7 @@ def init_app() -> FlaskApp:
         FileNotFoundError: If the configuration file is not found.
     """
     # Determine the configuration path
-    if config_path_env := os.getenv("TUS_FOCA_CONFIG_PATH"):
+    if config_path_env := os.getenv("CSH_FOCA_CONFIG_PATH"):
         print(config_path_env)
         config_path = Path(config_path_env).resolve()
     else:
@@ -49,7 +56,8 @@ def main(env: Optional[str] = None) -> None:
 
     Args:
         env (str, optional): The environment in which to run the application.
-                             Defaults to 'prod' if not specified.
+                             Defaults to 'dev' if not specified. Acceptable values
+                             are 'dev' and 'prod'.
     """
     # Set default port
     default_port = 8081
@@ -59,8 +67,13 @@ def main(env: Optional[str] = None) -> None:
 
     # Set environment and port
     if env is None:
-        env = "prod"
-    port = app.port if env == "prod" else default_port
+        env = Environment.DEV.value
+    elif env not in [e.value for e in Environment]:
+        raise ValueError(
+            f"Invalid environment: {env}. Must be one of {[e.value for e in Environment]}"
+        )
+
+    port = app.port if env == Environment.DEV.value else default_port
 
     # Run the application
     app.run(port=port)
@@ -68,5 +81,5 @@ def main(env: Optional[str] = None) -> None:
 
 if __name__ == "__main__":
     # Get environment variable or default to 'dev'
-    environment = os.getenv("ENV", "dev")
+    environment = os.getenv("ENVIRONMENT", "dev")
     main(environment)

@@ -1,1 +1,1 @@
-"""Elixircloud API package."""
+"""ELIXIR Cloud API package."""
