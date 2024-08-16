@@ -8,7 +8,7 @@ info:
     email: cloud-service@elixir-europe.org
   license:
     name: Apache 2.0
-    url: 'https://github.com/elixir-cloud-aai/Cloud-Storage-Handler/blob/main/LICENSE'
+    url: 'https://github.com/elixir-cloud-aai/tus_storagehandler/blob/main/LICENSE'
 servers:
   - url: /elixircoud/csh/v1
 paths:
