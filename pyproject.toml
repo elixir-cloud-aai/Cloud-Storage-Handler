@@ -6,6 +6,13 @@ requires = ["poetry-core"]
 warn_return_any = true
 warn_unused_configs = true
 
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = [
+  "connexion.*",
+  "foca",
+]
+
 [tool.poetry]
 authors = ["ELIXIR Cloud AAI <cloud-service@elixir-europe.org>"]
 classifiers = [
@@ -17,14 +24,15 @@ classifiers = [
 description = "File handler utilizing TUS and MinIO with DRS-Filer integration."
 license = "Apache-2.0"
 maintainers = ["ELIXIR Cloud AAI <cloud-service@elixir-europe.org>"]
-name = "Tus-Storage-Handler"
+name = "tus_storagehandler"
 readme = "README.md"
 repository = "https://github.com/elixir-cloud-aai/tus_storagehandler"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<4.0"
+flask = "2.2.3"
 foca = "^0.13.0"
+python = ">=3.11,<4.0"
 sphinx = "^8.0.2"
 
 [tool.poetry.group.code_quality]
@@ -100,10 +108,3 @@ select = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-[[tool.mypy.overrides]]
-module = [
-    "connexion.*",
-    "foca"
-]
-ignore_missing_imports = true
