@@ -27,7 +27,3 @@ def test_get_root():
         mock_get.assert_called_once_with(server_url)
 
     print("Finished test_get_root")
-
-
-if __name__ == "__main__":
-    test_get_root()
