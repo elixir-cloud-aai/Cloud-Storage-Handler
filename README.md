@@ -37,7 +37,7 @@ for cross-origin requests.
 
 ### Prerequisites
 
-This flask application requires a running instance of
+This Flask application requires a running instance of
 [MinIO](https://min.io/download).
 
 Run the MinIO instance by executing the following command in the location where
