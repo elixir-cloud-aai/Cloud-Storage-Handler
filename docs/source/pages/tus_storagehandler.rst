@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   tus_storagehandler.api
+   cloud_storage_handler.api
 
 Submodules
 ----------
@@ -15,7 +15,7 @@ Submodules
 tus\_storagehandler.app module
 ------------------------------
 
-.. automodule:: tus_storagehandler.app
+.. automodule:: cloud_storage_handler.app
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ tus\_storagehandler.app module
 tus\_storagehandler.exceptions module
 -------------------------------------
 
-.. automodule:: tus_storagehandler.exceptions
+.. automodule:: cloud_storage_handler.exceptions
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ tus\_storagehandler.exceptions module
 Module contents
 ---------------
 
-.. automodule:: tus_storagehandler
+.. automodule:: cloud_storage_handler
    :members:
    :undoc-members:
    :show-inheritance:

@@ -46,4 +46,4 @@ bug in -->
 - Operating System and version (desktop or mobile):
 - Link to your project:
 
-[issue-tracker]: https://github.com/elixir-cloud-aai/tus_storagehandler/issues
+[issue-tracker]: https://github.com/elixir-cloud-aai/cloud_storage_handler/issues

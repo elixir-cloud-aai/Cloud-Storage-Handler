@@ -7,12 +7,12 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   tus_storagehandler.api.elixircloud.csh
+   cloud_storage_handler.api.elixircloud.csh
 
 Module contents
 ---------------
 
-.. automodule:: tus_storagehandler.api.elixircloud
+.. automodule:: cloud_storage_handler.api.elixircloud
    :members:
    :undoc-members:
    :show-inheritance:

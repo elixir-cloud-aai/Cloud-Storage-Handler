@@ -1,4 +1,4 @@
-"""Test operations for the tus-storagehandler service."""
+"""Test operations for the cloud_storage_handler service."""
 
 from http import HTTPStatus
 from unittest import mock

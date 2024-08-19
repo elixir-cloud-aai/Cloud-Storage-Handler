@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: >
       https://github.com/elixir-cloud-aai/
-      tus_storagehandler/blob/main/LICENSE
+      cloud_storage_handler/blob/main/LICENSE
 servers:
   - url: /elixircoud/csh/v1
 paths:

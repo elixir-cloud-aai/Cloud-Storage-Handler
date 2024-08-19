@@ -1,4 +1,4 @@
-Welcome to tus_storagehandler's documentation!
+Welcome to cloud_storage_handler's documentation!
 ===========================================================
 
 .. toctree::

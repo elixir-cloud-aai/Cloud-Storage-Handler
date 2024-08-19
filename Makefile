@@ -25,7 +25,7 @@ help:
 
 	@echo "Environment Management --------------------------------------------------------"
 	@echo "  \033[1m\033[35mclean-venv\033[0m \033[37m(cv)\033[0m: \033[36mRemove virtual environment.\033[0m"
-	@echo "  \033[1m\033[35minstall\033[0m \033[37m(i)\033[0m: \033[36mInstall dependencies and tus_storagehandler.\033[0m"
+	@echo "  \033[1m\033[35minstall\033[0m \033[37m(i)\033[0m: \033[36mInstall dependencies and cloud_storage_handler.\033[0m"
 	@echo "  \033[1m\033[35mvenv\033[0m \033[37m(v)\033[0m: \033[36mCreate virtual environment.\033[0m\n"
 
 	@echo "Miscellaneous -----------------------------------------------------------------"
@@ -50,7 +50,7 @@ cv: clean-venv
 .PHONY: docs
 docs:
 	@echo "\nGenerating project documentation ++++++++++++++++++++++++++++++++++++++++++++++\n"
-	@poetry run sphinx-apidoc -f -o docs/source/pages tus_storagehandler
+	@poetry run sphinx-apidoc -f -o docs/source/pages cloud_storage_handler
 	@cd docs && make html
 	@echo "\nSummary ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
 	@echo "Documentation generated successfully."
@@ -90,7 +90,7 @@ pc: precommit-check
 security:
 	@echo "\nRunning security scans using bandit and safety ++++++++++++++++++++++++++++++++\n"
 	@poetry run safety check --full-report
-	@poetry run bandit -c pyproject.toml -r tus_storagehandler
+	@poetry run bandit -c pyproject.toml -r cloud_storage_handler
 
 .PHONY: s
 s: security
@@ -106,7 +106,7 @@ t: test
 .PHONY: type-check
 type-check:
 	@echo "\nPerforming type checking with mypy ++++++++++++++++++++++++++++++++++++++++++++\n"
-	@poetry run mypy tus_storagehandler
+	@poetry run mypy cloud_storage_handler
 
 .PHONY: tc
 tc: type-check

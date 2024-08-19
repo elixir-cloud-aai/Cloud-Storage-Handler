@@ -1,7 +1,7 @@
-tus_storagehandler
+cloud_storage_handler
 ==================
 
 .. toctree::
    :maxdepth: 4
 
-   tus_storagehandler
+   cloud_storage_handler

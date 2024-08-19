@@ -80,5 +80,5 @@ jobs:
           poetry-export-options: "--with=code_quality --with=types"
 
       - name: Check types
-        run: poetry run mypy tus_storagehandler/
+        run: poetry run mypy cloud_storage_handler/
 ...

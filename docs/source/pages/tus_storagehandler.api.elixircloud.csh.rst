@@ -7,7 +7,7 @@ Submodules
 tus\_storagehandler.api.elixircloud.csh.controllers module
 ----------------------------------------------------------
 
-.. automodule:: tus_storagehandler.api.elixircloud.csh.controllers
+.. automodule:: cloud_storage_handler.api.elixircloud.csh.controllers
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ tus\_storagehandler.api.elixircloud.csh.controllers module
 Module contents
 ---------------
 
-.. automodule:: tus_storagehandler.api.elixircloud.csh
+.. automodule:: cloud_storage_handler.api.elixircloud.csh
    :members:
    :undoc-members:
    :show-inheritance:
