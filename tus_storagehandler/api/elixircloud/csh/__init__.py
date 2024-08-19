@@ -1,1 +1,1 @@
-"""Cloud Storage Handler API package."""
+"""ELIXIR Cloud Storage Handler API package."""
