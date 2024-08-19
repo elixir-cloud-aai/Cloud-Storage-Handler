@@ -57,20 +57,20 @@ minio server /data --console-address ":9001"
    git clone https://github.com/elixir-cloud-aai/tus-storagehandler.git
    ```
 
-2. **Navigate to the package folder** 
-   
+1. **Navigate to the package folder**
+
    Navigate to the folder `tus_storagehandler`:
 
    ```sh
    cd tus_storagehandler
    ```
 
-3. **Install Poetry**
+1. **Install Poetry**
 
    If you haven't already, install Poetry by following the instructions on the
    [Poetry website](https://python-poetry.org/docs/#installation).
 
-4. **Create and Activate a Virtual Environment (optional)**
+1. **Create and Activate a Virtual Environment (optional)**
 
    Poetry automatically creates and manages a virtual environment for your
    project. You can activate it using:
@@ -79,7 +79,7 @@ minio server /data --console-address ":9001"
    poetry shell
    ```
 
-5. **Install Dependencies**
+1. **Install Dependencies**
 
    Run the following command to install the dependencies defined in the
    `pyproject.toml` file:
@@ -183,10 +183,14 @@ make u
 ## Environment Variables
 
 <!-- markdownlint-disable line-length -->
+
 | **Environment Variable** | **Description** | **Usage** | **Error Handling** |
-|--|--|--|--| 
-| `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration file for the FOCA app. | The FOCA app uses this environment variable to locate the configuration file. If not set, it defaults to `dev`. | If the configuration file is not found at the specified or default path, a `FileNotFoundError` will be raised. | 
-| `ENVIRONMENT` | Defines the environment in which the application runs (`dev` or `prod`). | Determines the port and behavior of the app. Defaults to `dev` if not set. | A `ValueError` will be raised if an invalid environment is provided.
+|--|--|--|--| | `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration
+file for the FOCA app. | The FOCA app uses this environment variable to locate
+the configuration file. If not set, it defaults to `dev`. | If the configuration
+file is not found at the specified or default path, a `FileNotFoundError` will
+be raised. |
+
 <!-- markdownlint-enable line-length -->
 
 ## Contributing
