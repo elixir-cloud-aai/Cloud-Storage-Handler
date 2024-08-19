@@ -1,3 +1,4 @@
+---
 openapi: 3.0.2
 info:
   version: 1.0.0
@@ -8,7 +9,9 @@ info:
     email: cloud-service@elixir-europe.org
   license:
     name: Apache 2.0
-    url: 'https://github.com/elixir-cloud-aai/tus_storagehandler/blob/main/LICENSE'
+    url: >
+      https://github.com/elixir-cloud-aai/
+      tus_storagehandler/blob/main/LICENSE
 servers:
   - url: /elixircoud/csh/v1
 paths:
@@ -32,3 +35,4 @@ paths:
           description: The request is malformed.
         '500':
           description: An unexpected error occurred.
+...

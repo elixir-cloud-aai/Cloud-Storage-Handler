@@ -1,3 +1,4 @@
+---
 name: Run Application
 
 on:
@@ -31,7 +32,7 @@ jobs:
           make v
           source .venv/bin/activate
           make i
-      
+
       - name: Start server in the background
         run: |
           tus_storagehandler &
@@ -44,3 +45,4 @@ jobs:
       - name: Stop server
         run: |
           kill $(cat server.pid) || true
+...
