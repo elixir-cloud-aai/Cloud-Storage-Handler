@@ -1,5 +1,5 @@
 cloud_storage_handler
-==================
+=====================
 
 .. toctree::
    :maxdepth: 4
