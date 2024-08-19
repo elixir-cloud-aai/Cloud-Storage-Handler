@@ -1,0 +1,48 @@
+---
+name: Run Application
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Activate environment and install dependencies
+        run: |
+          make v
+          source .venv/bin/activate
+          make i
+
+      - name: Start server in the background
+        run: |
+          tus_storagehandler &
+          echo $! > server.pid
+
+      - name: Run tests
+        run: |
+          poetry run pytest tests/test_integration
+
+      - name: Stop server
+        run: |
+          kill $(cat server.pid) || true
+...

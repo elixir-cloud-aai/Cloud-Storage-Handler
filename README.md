@@ -18,6 +18,7 @@ File handler utilizing TUS and MinIO with DRS-Filer integration.
 - [Basic Usage](#basic-usage)
 - [Installation](#installation)
 - [Development](#development)
+- [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [Versioning](#versioning)
@@ -25,7 +26,10 @@ File handler utilizing TUS and MinIO with DRS-Filer integration.
 - [Contact](#contact)
 
 ## Synopsis
-This application provides endpoints for uploading, downloading, and listing files in a MinIO bucket, with TUS protocol support for uploads, and CORS enabled for cross-origin requests.
+
+This application provides endpoints for uploading, downloading, and listing
+files in a MinIO bucket, with TUS protocol support for uploads, and CORS enabled
+for cross-origin requests.
 
 ## Basic Usage
 
@@ -33,9 +37,11 @@ This application provides endpoints for uploading, downloading, and listing file
 
 ### Prerequisites
 
-This flask application requires a running instance of [minio](https://min.io/download)
+This Flask application requires a running instance of
+[MinIO](https://min.io/download).
 
-Run the minio instance by executing the following command in the location where minio is installed
+Run the MinIO instance by executing the following command in the location where
+MinIO is installed:
 
 ```sh
 minio server /data --console-address ":9001"
@@ -43,28 +49,45 @@ minio server /data --console-address ":9001"
 
 ### Install Dependencies using Poetry
 
-1. **Download the required dependencies**
+1. **Clone the Repository**
 
-   Navigate to the folder `tus_storagehandler`.
+   To get started, first, clone the repository using the following command:
 
-2. **Install Poetry**
+   ```sh
+   git clone https://github.com/elixir-cloud-aai/tus-storagehandler.git
+   ```
 
-   If you haven't already, install Poetry by following the instructions on the [Poetry website](https://python-poetry.org/docs/#installation).
+1. **Navigate to the package folder**
 
-3. **Create and Activate a Virtual Environment (optional)**
+   Navigate to the folder `tus_storagehandler`:
 
-   Poetry automatically creates and manages a virtual environment for your project. You can activate it using:
+   ```sh
+   cd tus_storagehandler
+   ```
+
+1. **Install Poetry**
+
+   If you haven't already, install Poetry by following the instructions on the
+   [Poetry website](https://python-poetry.org/docs/#installation).
+
+1. **Create and Activate a Virtual Environment (optional)**
+
+   Poetry automatically creates and manages a virtual environment for your
+   project. You can activate it using:
+
    ```sh
    poetry shell
    ```
 
-4. **Install Dependencies**
+1. **Install Dependencies**
 
-   Run the following command to install the dependencies defined in the `pyproject.toml` file:
+   Run the following command to install the dependencies defined in the
+   `pyproject.toml` file:
+
    ```sh
    poetry install
    ```
-  
+
 ## Development
 
 For ease of use, certain scripts have been abbreviated in `Makefile`, make sure
@@ -156,6 +179,16 @@ make u
 
 > **Note**: This is not the complete list of commands, run `make` to find out if
 > more have been added.
+
+## Environment Variables
+
+<!-- markdownlint-disable line-length -->
+
+| **Environment Variable** | **Description** | **Usage** | **Error Handling** |
+|--|--|--|--| 
+| `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration file for the FOCA app. | The FOCA app uses this environment variable to locate the configuration file. If not set, it defaults to `dev`. | If the configuration file is not found at the specified or default path, a `FileNotFoundError` will be raised. |
+
+<!-- markdownlint-enable line-length -->
 
 ## Contributing
 

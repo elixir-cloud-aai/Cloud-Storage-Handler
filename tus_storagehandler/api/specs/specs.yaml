@@ -1,0 +1,38 @@
+---
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Cloud Storage Handler
+  description: API for handling files on a cloud storage service
+  contact:
+    name: ELIXIR Cloud & AAI
+    email: cloud-service@elixir-europe.org
+  license:
+    name: Apache 2.0
+    url: >
+      https://github.com/elixir-cloud-aai/
+      tus_storagehandler/blob/main/LICENSE
+servers:
+  - url: /elixircoud/csh/v1
+paths:
+  /:
+    get:
+      description: |
+        Returns a welcome message
+      operationId: home
+      responses:
+        '200':
+          description: basic response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Welcome to Tus Storage Handler API"
+        '400':
+          description: The request is malformed.
+        '500':
+          description: An unexpected error occurred.
+...

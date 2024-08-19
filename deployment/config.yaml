@@ -1,0 +1,42 @@
+---
+server:
+    host: '0.0.0.0'
+    port: 8080
+    debug: false
+    environment: development
+    testing: false
+    use_reloader: true
+
+security:
+    auth:
+        required: true
+        add_key_to_claims: true
+        allow_expired: false
+        audience: null
+        claim_identity: sub
+        claim_issuer: iss
+        algorithms:
+            - RS256
+        validation_methods:
+            - userinfo
+            - public_key
+        validation_checks: all
+
+api:
+    specs:
+        - path: tus_storagehandler/api/specs/specs.yaml
+          append: null
+          add_operation_fields:
+              x-openapi-router-controller: tus_storagehandler.api.elixircloud.csh.controllers
+          connexion:
+              strict_validation: true
+              validate_responses: false
+              options:
+                  swagger_ui: true
+                  serve_spec: true
+
+exceptions:
+    required_members: [['message'], ['code']]
+    status_member: ['code']
+    exceptions: tus_storagehandler.exceptions.exceptions
+...
