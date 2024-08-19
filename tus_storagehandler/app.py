@@ -2,20 +2,10 @@
 
 import logging
 import os
-from enum import Enum
 from pathlib import Path
-from typing import Optional
 
 from connexion import FlaskApp
 from foca import Foca
-
-
-class Environment(Enum):
-    """Defines possible environments for the application."""
-
-    DEV = "dev"
-    PROD = "prod"
-
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +41,7 @@ def init_app() -> FlaskApp:
         config_file=config_path,
     )
     return foca.create_app()
+
 
 def main() -> None:
     """Run FOCA application."""
