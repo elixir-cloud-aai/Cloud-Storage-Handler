@@ -53,13 +53,13 @@ minio server /data --console-address ":9001"
 
    To get started, first, clone the repository using the following command:
 
-```sh
-git clone https://github.com/elixir-cloud-aai/tus-storagehandler.git
-```
+   ```sh
+   git clone https://github.com/elixir-cloud-aai/tus-storagehandler.git
+   ```
 
 2. **Navigate to the package folder** 
    
-   Navigate to the folder `tus_storagehandler`.
+   Navigate to the folder `tus_storagehandler`:
 
    ```sh
    cd tus_storagehandler
@@ -182,10 +182,12 @@ make u
 
 ## Environment Variables
 
+<!-- markdownlint-disable line-length -->
 | **Environment Variable** | **Description** | **Usage** | **Error Handling** |
 |--|--|--|--| 
 | `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration file for the FOCA app. | The FOCA app uses this environment variable to locate the configuration file. If not set, it defaults to `dev`. | If the configuration file is not found at the specified or default path, a `FileNotFoundError` will be raised. | 
 | `ENVIRONMENT` | Defines the environment in which the application runs (`dev` or `prod`). | Determines the port and behavior of the app. Defaults to `dev` if not set. | A `ValueError` will be raised if an invalid environment is provided.
+<!-- markdownlint-enable line-length -->
 
 ## Contributing
 
