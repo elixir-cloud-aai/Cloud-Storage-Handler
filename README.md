@@ -38,10 +38,10 @@ for cross-origin requests.
 ### Prerequisites
 
 This flask application requires a running instance of
-[minio](https://min.io/download)
+[MinIO](https://min.io/download).
 
-Run the minio instance by executing the following command in the location where
-minio is installed
+Run the MinIO instance by executing the following command in the location where
+MinIO is installed:
 
 ```sh
 minio server /data --console-address ":9001"
@@ -49,9 +49,21 @@ minio server /data --console-address ":9001"
 
 ### Install Dependencies using Poetry
 
-1. **Download the required dependencies**
+1. **Clone the Repository**
+
+To get started, first, clone the repository using the following command:
+
+```bash
+git clone https://github.com/elixir-cloud-aai/tus-storagehandler.git
+```
+
+1. **Navigate to the package folder**
 
    Navigate to the folder `tus_storagehandler`.
+
+```bash
+cd tus_storagehandler
+```
 
 1. **Install Poetry**
 
@@ -170,12 +182,15 @@ make u
 
 ## Environment Variables
 
-| **Environment Variable**|**Description**|**Usage**|**Error Handling**|
-|---|---|---|---| | `CSH_FOCA_CONFIG_PATH` | Specifies the path to the
-configuration file for the FOCA app. | The FOCA app uses this environment
-variable to locate the configuration file. If not set, it defaults to dev. | If
-the configuration file is not found at the specified or default path, a
-`FileNotFoundError` will be raised. |
+| **Environment Variable** | **Description** | **Usage** | **Error Handling** |
+|--|--|--|--| | `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration
+file for the FOCA app. | The FOCA app uses this environment variable to locate
+the configuration file. If not set, it defaults to `dev`. | If the configuration
+file is not found at the specified or default path, a `FileNotFoundError` will
+be raised. | | `ENVIRONMENT` | Defines the environment in which the application
+runs (`dev` or `prod`). | Determines the port and behavior of the app. Defaults
+to `dev` if not set. | A `ValueError` will be raised if an invalid environment
+is provided.
 
 ## Contributing
 

@@ -24,7 +24,7 @@ def init_app() -> FlaskApp:
     """Initialize and return the FOCA app.
 
     This function initializes the FOCA app by loading the configuration
-    from the environment variable `TUS_FOCA_CONFIG_PATH` if set, or from
+    from the environment variable `CSH_FOCA_CONFIG_PATH` if set, or from
     the default path if not. It raises a `FileNotFoundError` if the
     configuration file is not found.
 
