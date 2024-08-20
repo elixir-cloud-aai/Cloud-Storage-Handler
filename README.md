@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/elixir-cloud-aai/cloud-storage-handler/branch/main/graph/badge.svg)](https://codecov.io/gh/elixir-cloud-aai/cloud-storage-handler)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)][code-of-conduct]
 [![Documentation Status](https://readthedocs.org/projects/cloud_storage_handler/badge/?version=latest)](https://cloud_storage_handler.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/cloud_storage_handler/badge/?version=latest)](https://cloud_storage_handler.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![GitHub contributors](https://img.shields.io/github/contributors/elixir-cloud-aai/cloud-storage-handler)](https://github.com/elixir-cloud-aai/cloud-storage-handler/graphs/contributors)
@@ -60,8 +61,10 @@ minio server /data --console-address ":9001"
 1. **Navigate to the package folder**
 
    Navigate to the folder `cloud_storage_handler`:
+   Navigate to the folder `cloud_storage_handler`:
 
    ```sh
+   cd cloud_storage_handler
    cd cloud_storage_handler
    ```
 
