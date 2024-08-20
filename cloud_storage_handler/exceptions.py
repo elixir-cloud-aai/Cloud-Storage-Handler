@@ -1,4 +1,4 @@
-"""Tus Storage Handler exceptions."""
+"""ELIXIR's Cloud Storage Handler exceptions."""
 
 from http import HTTPStatus
 

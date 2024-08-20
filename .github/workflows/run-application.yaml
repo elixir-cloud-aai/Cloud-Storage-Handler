@@ -35,7 +35,7 @@ jobs:
 
       - name: Start server in the background
         run: |
-          tus_storagehandler &
+          cloud_storage_handler &
           echo $! > server.pid
 
       - name: Run tests
