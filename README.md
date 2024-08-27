@@ -187,7 +187,7 @@ make u
 | **Environment Variable** | **Description** | **Usage** | **Error Handling** |
 |--|--|--|--|
 | `MINIO_HOSTNAME`          | The hostname for the MinIO server. | Used to specify the MinIO server's hostname in the application. | If not set, the application might fail to connect to the MinIO server, leading to a connection error. |
-| `MINIO_PORT`              | The port for the MinIO server. | Specifies the port on which the MinIO server is running. | If not set, the application may default to an incorrect port, causing connection failures. |
+| `MINIO_PORT`              | The port for the MinIO server. Default is 9000. | Specifies the port on which the MinIO server is running. | If not set, the application will use the default port 9000. |
 | `MINIO_ACCESS_KEY`        | The access key for MinIO. | Used for authenticating with the MinIO server. | If not set, authentication will fail, preventing access to the MinIO server. |
 | `MINIO_SECRET_KEY`        | The secret key for MinIO. | Used along with the access key for authenticating with the MinIO server. | If not set, authentication will fail, preventing access to the MinIO server. |
 | `MINIO_IS_SECURE`         | Boolean to determine if the connection is secure. | Determines if the connection to the MinIO server should use HTTPS. | If set to `false` when the server requires HTTPS, or `true` when the server doesn't support HTTPS, the application will fail to connect. Ensure this matches your MinIO server's configuration. |
