@@ -11,6 +11,7 @@ ignore_missing_imports = true
 module = [
   "connexion.*",
   "foca",
+  "minio"
 ]
 
 [tool.poetry]

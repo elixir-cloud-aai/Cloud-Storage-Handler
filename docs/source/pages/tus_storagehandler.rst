@@ -20,10 +20,26 @@ tus\_storagehandler.app module
    :undoc-members:
    :show-inheritance:
 
+tus\_storagehandler.consts module
+---------------------------------
+
+.. automodule:: tus_storagehandler.consts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 tus\_storagehandler.exceptions module
 -------------------------------------
 
 .. automodule:: tus_storagehandler.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tus\_storagehandler.minio\_client module
+----------------------------------------
+
+.. automodule:: tus_storagehandler.minio_client
    :members:
    :undoc-members:
    :show-inheritance:
