@@ -12,6 +12,8 @@ Environment variables expected:
 import os
 
 MINIO_HOSTNAME = os.getenv("MINIO_HOSTNAME")
+if MINIO_HOSTNAME is None:
+    raise ValueError("MINIO_HOSTNAME environment variable is not set")
 MINIO_PORT = os.getenv("MINIO_PORT")
 MINIO_ENDPOINT = f"{MINIO_HOSTNAME}:{MINIO_PORT}"
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
