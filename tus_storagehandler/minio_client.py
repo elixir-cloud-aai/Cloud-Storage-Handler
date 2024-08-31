@@ -6,6 +6,7 @@ bucket if it does not already exist.
 """
 
 from minio import Minio
+
 from tus_storagehandler.consts import (
     MINIO_ACCESS_KEY,
     MINIO_BUCKET,
@@ -13,6 +14,7 @@ from tus_storagehandler.consts import (
     MINIO_IS_SECURE,
     MINIO_SECRET_KEY,
 )
+
 
 class MinioClient:
     """A class to manage MinIO client configuration and bucket creation."""
