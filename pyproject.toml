@@ -84,7 +84,7 @@ bandit = ">=1.7.8,<2.0.0"
 safety = ">=3.2.0,<4.0.0"
 
 [tool.poetry.scripts]
-cloud_storage_handler = "cloud_storage_handler.main:main"
+cloud-storage-handler = "cloud_storage_handler.main:main"
 
 [tool.ruff]
 indent-width = 4

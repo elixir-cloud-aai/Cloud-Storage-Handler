@@ -1,14 +1,14 @@
 [![Bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://bandit.readthedocs.io/en/latest/)
 [![codecov](https://codecov.io/gh/elixir-cloud-aai/cloud-storage-handler/branch/main/graph/badge.svg)](https://codecov.io/gh/elixir-cloud-aai/cloud-storage-handler)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)][code-of-conduct]
-[![Documentation Status](https://readthedocs.org/projects/cloud_storage_handler/badge/?version=latest)](https://cloud_storage_handler.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/cloud-storage-handler/badge/?version=latest)](https://cloud-storage-handler.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![GitHub contributors](https://img.shields.io/github/contributors/elixir-cloud-aai/cloud-storage-handler)](https://github.com/elixir-cloud-aai/cloud-storage-handler/graphs/contributors)
 [![Ruff](https://img.shields.io/badge/linter%20&%20formatter-ruff-000000.svg)](https://docs.astral.sh/ruff/)
 [![Safety](https://img.shields.io/badge/security-safety-orange.svg)](https://safetycli.com/product/safety-cli)
 
-# cloud-storage-handler
+# Cloud Storage Handler
 
 File handler utilizing TUS and MinIO with DRS-Filer integration.
 
@@ -59,10 +59,10 @@ minio server /data --console-address ":9001"
 
 1. **Navigate to the package folder**
 
-   Navigate to the folder `cloud_storage_handler`:
+   Navigate to the folder `cloud-storage-handler`:
 
    ```sh
-   cd cloud_storage_handler
+   cd cloud-storage-handler
    ```
 
 1. **Install Poetry**
@@ -185,8 +185,11 @@ make u
 <!-- markdownlint-disable line-length -->
 
 | **Environment Variable** | **Description** | **Usage** | **Error Handling** |
-|--|--|--|--| 
-| `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration file for the FOCA app. | The FOCA app uses this environment variable to locate the configuration file. If not set, it defaults to `dev`. | If the configuration file is not found at the specified or default path, a `FileNotFoundError` will be raised. |
+|--|--|--|--| | `CSH_FOCA_CONFIG_PATH` | Specifies the path to the configuration
+file for the FOCA app. | The FOCA app uses this environment variable to locate
+the configuration file. If not set, it defaults to `dev`. | If the configuration
+file is not found at the specified or default path, a `FileNotFoundError` will
+be raised. |
 
 <!-- markdownlint-enable line-length -->
 

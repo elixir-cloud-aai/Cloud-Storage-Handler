@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: >
       https://github.com/elixir-cloud-aai/
-      cloud-storage-handler/blob/main/LICENSE
+      cloud_storage_handler/blob/main/LICENSE
 servers:
   - url: /elixircoud/csh/v1
 paths:
@@ -30,7 +30,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Welcome to Tus Storage Handler API"
+                    example: "Welcome to Cloud Storage Handler API"
         '400':
           description: The request is malformed.
         '500':

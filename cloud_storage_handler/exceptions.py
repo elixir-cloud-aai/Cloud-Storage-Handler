@@ -18,7 +18,7 @@ exceptions = {
         "code": HTTPStatus.NOT_FOUND,  # 404
     },
     InternalServerError: {
-        "message": "An internal server error occurred in the tus storage handler",
+        "message": "An internal server error occurred in the cloud storage handler",
         "code": HTTPStatus.INTERNAL_SERVER_ERROR,  # 500
     },
 }
