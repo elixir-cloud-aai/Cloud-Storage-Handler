@@ -24,10 +24,10 @@ security:
 
 api:
     specs:
-        - path: tus_storagehandler/api/specs/specs.yaml
+        - path: cloud_storage_handler/api/specs/specs.yaml
           append: null
           add_operation_fields:
-              x-openapi-router-controller: tus_storagehandler.api.elixircloud.csh.controllers
+              x-openapi-router-controller: cloud_storage_handler.api.elixircloud.csh.controllers
           connexion:
               strict_validation: true
               validate_responses: false
@@ -38,5 +38,5 @@ api:
 exceptions:
     required_members: [['message'], ['code']]
     status_member: ['code']
-    exceptions: tus_storagehandler.exceptions.exceptions
+    exceptions: cloud_storage_handler.exceptions.exceptions
 ...

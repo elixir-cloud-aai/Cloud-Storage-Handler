@@ -1,4 +1,4 @@
-"""Cloud Storage Handler controllers."""
+"""ELIXIR's Cloud Storage Handler controllers."""
 
 import logging
 from http import HTTPStatus
