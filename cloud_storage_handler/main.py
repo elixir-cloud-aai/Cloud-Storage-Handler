@@ -39,6 +39,7 @@ def init_app() -> FlaskApp:
 
     foca = Foca(
         config_file=config_path,
+        custom_config_model="cloud_storage_handler.custom_config.CustomConfig",
     )
     return foca.create_app()
 

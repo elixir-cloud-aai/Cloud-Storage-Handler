@@ -12,6 +12,14 @@ cloud\_storage\_handler.api.elixircloud.csh.controllers module
    :undoc-members:
    :show-inheritance:
 
+cloud\_storage\_handler.api.elixircloud.csh.models module
+---------------------------------------------------------
+
+.. automodule:: cloud_storage_handler.api.elixircloud.csh.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

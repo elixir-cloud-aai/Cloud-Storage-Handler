@@ -35,6 +35,16 @@ api:
                   swagger_ui: true
                   serve_spec: true
 
+custom:
+    # MinIO configuration based on MinIO model
+    minio:
+        hostname: localhost
+        port: 9001
+        access_key: minioadmin
+        secret_key: minioadmin
+        is_secure: false
+        bucket_name: 'files'
+
 exceptions:
     required_members: [['message'], ['code']]
     status_member: ['code']
