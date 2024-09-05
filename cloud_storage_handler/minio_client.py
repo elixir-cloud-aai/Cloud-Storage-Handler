@@ -11,32 +11,29 @@ from cloud_storage_handler.utils import get_config_path
 logger = logging.getLogger(__name__)
 
 
-class MinioClient:
-    """A class to manage MinIO client configuration and bucket creation."""
+class MinioConfig:
+    """Handles the loading and parsing of MinIO configuration files."""
 
-    def __init__(self) -> None:
-        """Initializes the MinIO client class."""
-        self.minio_config_data = None
-        self.config = Foca(config_file=get_config_path()).conf
-        self.client = None  # MinIO client will be initialized later
+    def __init__(self, config_file=None):
+        """Initialize MinioConfig with a configuration file.
 
-    def initialise_minio(self, endpoint, access_key, secret_key, secure):
-        """Initialize the MinIO client with provided configurations."""
-        self.client = Minio(
-            endpoint=endpoint,
-            access_key=access_key,
-            secret_key=secret_key,
-            secure=secure,
-        )
-        return self.client
+        Args:
+            config_file (str): Path to the configuration file. If not provided,
+                               uses the default path.
+        """
+        config_file = config_file or get_config_path()
+        self.config = Foca(config_file=config_file).conf
 
-    def create_bucket(self, bucket_name):
-        """Create a new bucket if it does not already exist."""
-        if self.client is None:
-            raise RuntimeError("MinIO client is not initialized.")
+    def get_minio_config(self):
+        """Retrieve the MinIO configuration.
 
-        if not self.client.bucket_exists(bucket_name):
-            self.client.make_bucket(bucket_name)
+        Returns:
+            dict: A dictionary containing the MinIO configuration.
+        """
+        try:
+            return self.get_minio_from_config()
+        except ConfigNotFoundError:
+            return self.get_default_minio_config()
 
     def get_default_minio_config(self):
         """Get the default minio configuration."""
@@ -59,16 +56,41 @@ class MinioClient:
 
         minio_config_data = self.config.custom.get("minio")
         if not minio_config_data:
-            raise ConfigNotFoundError("Service info not found in custom configuration.")
+            raise ConfigNotFoundError(
+                "MinIO configuration not found in custom configuration."
+            )
 
         return minio_config_data
 
-    def response(self):
-        """Returns minio configuration response."""
-        if self.minio_config_data is None:
-            try:
-                self.minio_config_data = self.get_minio_from_config()
-            except ConfigNotFoundError:
-                self.minio_config_data = self.get_default_minio_config()
 
-        return self.minio_config_data
+class MinioClient:
+    """A class to manage MinIO client configuration and bucket creation."""
+
+    def __init__(self):
+        """Initialize the MinIO client and create bucket if necessary."""
+        config = MinioConfig().get_minio_config()
+        self.client = self.initialise_minio(
+            endpoint=f"{config['hostname']}:{config['port']}",
+            access_key=config["access_key"],
+            secret_key=config["secret_key"],
+            secure=config["is_secure"],
+        )
+        self.bucket_name = config["bucket_name"]
+
+    def initialise_minio(self, endpoint, access_key, secret_key, secure):
+        """Initialize the MinIO client with provided configurations."""
+        self.client = Minio(
+            endpoint=endpoint,
+            access_key=access_key,
+            secret_key=secret_key,
+            secure=secure,
+        )
+        return self.client
+
+    def create_bucket(self, bucket_name):
+        """Create a new bucket if it does not already exist."""
+        if self.client is None:
+            raise RuntimeError("MinIO client is not initialized.")
+
+        if not self.client.bucket_exists(bucket_name):
+            self.client.make_bucket(bucket_name)

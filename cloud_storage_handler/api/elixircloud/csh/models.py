@@ -14,7 +14,11 @@ class MinioConfig(BaseModel):
         example="localhost",
     )
     port: int = Field(
-        ..., description="The port on which the MinIO server is running.", example=9000
+        ...,
+        description="The port on which the MinIO server is running.",
+        example=9000,
+        ge=1,
+        le=65535,
     )
     access_key: str = Field(
         ...,
