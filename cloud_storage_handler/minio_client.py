@@ -26,7 +26,7 @@ class MinioClient:
             endpoint=endpoint,
             access_key=access_key,
             secret_key=secret_key,
-            secure=secure,  # Correctly use the secure flag
+            secure=secure,
         )
         return self.client
 
