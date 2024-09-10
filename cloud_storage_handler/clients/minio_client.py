@@ -45,7 +45,6 @@ class MinioConfig:
             "port": 9000,
             "access_key": "minioadmin",
             "secret_key": "minioadmin",
-            "is_secure": False,
             "bucket_name": "files",
         }
 
@@ -73,7 +72,7 @@ class MinioClient:
             endpoint=f"{config['hostname']}:{config['port']}",
             access_key=config["access_key"],
             secret_key=config["secret_key"],
-            secure=config["is_secure"],
+            secure=False,
         )
         self.bucket_name = config["bucket_name"]
 
@@ -83,14 +82,17 @@ class MinioClient:
             endpoint=endpoint,
             access_key=access_key,
             secret_key=secret_key,
-            secure=secure,
+            secure=False,
         )
         return self.client
 
-    def create_bucket(self, bucket_name):
-        """Create a new bucket if it does not already exist."""
+    def create_bucket(self):
+        """Creation of bucket using the configured bucket name."""
         if self.client is None:
             raise RuntimeError("MinIO client is not initialized.")
 
-        if not self.client.bucket_exists(bucket_name):
-            self.client.make_bucket(bucket_name)
+        if not self.client.bucket_exists(self.bucket_name):
+            self.client.make_bucket(self.bucket_name)
+            logger.info(f"Bucket '{self.bucket_name}' created.")
+        else:
+            logger.info(f"Bucket '{self.bucket_name}' already exists.")

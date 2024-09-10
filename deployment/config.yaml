@@ -39,10 +39,9 @@ custom:
     # MinIO configuration based on MinIO model
     minio:
         hostname: localhost
-        port: 9001
+        port: 9000
         access_key: minioadmin
         secret_key: minioadmin
-        is_secure: false
         bucket_name: 'files'
 
 exceptions:

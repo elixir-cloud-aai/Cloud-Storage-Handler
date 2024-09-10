@@ -7,7 +7,12 @@ from pathlib import Path
 from connexion import FlaskApp
 from foca import Foca
 
+from cloud_storage_handler.clients.minio_client import MinioClient
+
 logger = logging.getLogger(__name__)
+
+minio_client = MinioClient()
+minio_client.create_bucket()
 
 
 def init_app() -> FlaskApp:
