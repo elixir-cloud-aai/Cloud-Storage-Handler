@@ -12,14 +12,6 @@ Subpackages
 Submodules
 ----------
 
-cloud\_storage\_handler.consts module
--------------------------------------
-
-.. automodule:: cloud_storage_handler.consts
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 cloud\_storage\_handler.custom\_config module
 ---------------------------------------------
 
@@ -40,14 +32,6 @@ cloud\_storage\_handler.main module
 -----------------------------------
 
 .. automodule:: cloud_storage_handler.main
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-cloud\_storage\_handler.minio\_client module
---------------------------------------------
-
-.. automodule:: cloud_storage_handler.minio_client
    :members:
    :undoc-members:
    :show-inheritance:
