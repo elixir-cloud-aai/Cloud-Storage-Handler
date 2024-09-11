@@ -35,4 +35,22 @@ paths:
           description: The request is malformed.
         '500':
           description: An unexpected error occurred.
+  /list_files:
+    get:
+      description: |
+        Returns a list of all files in the minio storage
+      operationId: list_files
+      responses:
+        '200':
+          description: The list of files has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: The request is malformed.
+        '500':
+          description: An unexpected error occurred.
 ...
