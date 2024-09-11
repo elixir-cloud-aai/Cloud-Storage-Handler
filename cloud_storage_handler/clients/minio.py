@@ -13,6 +13,7 @@ def get_minio_client():
     Returns:
         MinioClient: An initialized Minio client with a created bucket.
     """
-    client = MinioClient()
-    client.create_bucket()
+    init_client=MinioClient()
+    client=init_client.get_client()
+    init_client.create_bucket()
     return client

@@ -68,23 +68,16 @@ class MinioClient:
     def __init__(self):
         """Initialize the MinIO client and create bucket if necessary."""
         config = MinioConfig().get_minio_config()
-        self.client = self.initialise_minio(
+        self.client = Minio(
             endpoint=f"{config['hostname']}:{config['port']}",
             access_key=config["access_key"],
             secret_key=config["secret_key"],
-            secure=False,
+            secure=False
         )
         self.bucket_name = config["bucket_name"]
 
-    def initialise_minio(self, endpoint, access_key, secret_key, secure):
-        """Initialize the MinIO client with provided configurations."""
-        self.client = Minio(
-            endpoint=endpoint,
-            access_key=access_key,
-            secret_key=secret_key,
-            secure=False,
-        )
-        return self.client
+        # Create bucket if it doesn't exist
+        self.create_bucket()
 
     def create_bucket(self):
         """Creation of bucket using the configured bucket name."""
@@ -96,3 +89,7 @@ class MinioClient:
             logger.info(f"Bucket '{self.bucket_name}' created.")
         else:
             logger.info(f"Bucket '{self.bucket_name}' already exists.")
+
+    def get_client(self):
+        """Return the MinIO client."""
+        return self.client
