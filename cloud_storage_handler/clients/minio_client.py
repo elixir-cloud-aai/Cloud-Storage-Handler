@@ -72,7 +72,7 @@ class MinioClient:
             endpoint=f"{config['hostname']}:{config['port']}",
             access_key=config["access_key"],
             secret_key=config["secret_key"],
-            secure=False
+            secure=False,
         )
         self.bucket_name = config["bucket_name"]
 
