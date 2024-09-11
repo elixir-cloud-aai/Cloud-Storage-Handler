@@ -11,6 +11,7 @@ from cloud_storage_handler.clients.minio import get_minio_client
 
 logger = logging.getLogger(__name__)
 
+
 def init_app() -> FlaskApp:
     """Initialize and return the FOCA app.
 
@@ -48,7 +49,7 @@ def init_app() -> FlaskApp:
 def main() -> None:
     """Run FOCA application."""
     app = init_app()
-    minio_client = get_minio_client()
+    get_minio_client()
     app.run(port=app.port)
 
 
