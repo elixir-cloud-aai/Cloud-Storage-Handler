@@ -4,6 +4,14 @@ cloud\_storage\_handler.api.elixircloud.csh package
 Submodules
 ----------
 
+cloud\_storage\_handler.api.elixircloud.csh.constants module
+------------------------------------------------------------
+
+.. automodule:: cloud_storage_handler.api.elixircloud.csh.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 cloud\_storage\_handler.api.elixircloud.csh.controllers module
 --------------------------------------------------------------
 

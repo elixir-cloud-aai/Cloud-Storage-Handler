@@ -7,7 +7,7 @@ from pathlib import Path
 from connexion import FlaskApp
 from foca import Foca
 
-from cloud_storage_handler.clients.minio import get_minio_client
+from cloud_storage_handler.clients.minio import minio_client
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ def init_app() -> FlaskApp:
 def main() -> None:
     """Run FOCA application."""
     app = init_app()
-    get_minio_client()
+    _ = minio_client
     app.run(port=app.port)
 
 

@@ -17,3 +17,6 @@ def get_minio_client():
     client = init_client.get_client()
     init_client.create_bucket()
     return client
+
+
+minio_client = get_minio_client()
