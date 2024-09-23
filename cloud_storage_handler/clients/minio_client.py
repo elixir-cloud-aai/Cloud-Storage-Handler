@@ -26,7 +26,7 @@ class MinioConfigurationData:
         config_file = config_file or get_config_path()
         self.config = Foca(config_file=config_file).conf
 
-    def get_minio_config(self):
+    def get_minio_config(self) -> MinioConfig:
         """Retrieve the MinIO configuration.
 
         Returns:
