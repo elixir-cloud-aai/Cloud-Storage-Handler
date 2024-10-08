@@ -6,7 +6,6 @@ from pathlib import Path
 from foca import Foca
 
 from cloud_storage_handler.custom_config import CustomConfig
-from cloud_storage_handler.exceptions import ConfigNotFoundError
 
 
 def get_config_path() -> Path:
@@ -29,9 +28,4 @@ def get_custom_config() -> CustomConfig:
       The custom configuration.
     """
     conf = Foca(config_file=get_config_path()).conf
-    try:
-        return CustomConfig(**conf.custom)
-    except AttributeError:
-        raise ConfigNotFoundError(
-            "Custom configuration not found in config file."
-        ) from None
+    return CustomConfig(**conf.custom)

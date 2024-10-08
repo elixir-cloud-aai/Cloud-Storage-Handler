@@ -7,7 +7,6 @@ from minio import Minio
 
 from cloud_storage_handler.api.elixircloud.csh.constants import CshConstants
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
-from cloud_storage_handler.exceptions import ConfigNotFoundError
 from cloud_storage_handler.utils import get_config_path
 
 logger = logging.getLogger(__name__)
@@ -32,31 +31,7 @@ class MinioConfigurationData:
         Returns:
             A dictionary containing the MinIO configuration.
         """
-        try:
-            return self.get_minio_from_config()
-        except ConfigNotFoundError:
-            return self.get_default_minio_config()
-
-    def get_default_minio_config(self) -> MinioConfig:
-        """Get the default minio configuration."""
-        logger.warning(
-            "Minio configuration not found in config. Using default configuration."
-        )
-        csh_constants = CshConstants()
-        minio_config = csh_constants.get_minio_config()
-        return minio_config
-
-    def get_minio_from_config(self) -> MinioConfig:
-        """Returns minio configuration from config."""
-        if not self.config.custom:
-            raise ConfigNotFoundError("Custom configuration not found.")
-
         minio_config = self.config.custom.get("minio")
-        if not minio_config:
-            raise ConfigNotFoundError(
-                "MinIO configuration not found in custom configuration."
-            )
-
         return MinioConfig(
             hostname=minio_config["hostname"],
             port=minio_config["port"],
@@ -64,7 +39,7 @@ class MinioConfigurationData:
             secret_key=minio_config["secret_key"],
             bucket_name=minio_config["bucket_name"],
         )
-
+        
 
 class MinioClient:
     """A class to manage MinIO client configuration and bucket creation."""
@@ -72,7 +47,6 @@ class MinioClient:
     def __init__(self):
         """Initialize the MinIO client and create bucket if necessary."""
         config = MinioConfigurationData().get_minio_config()
-        print(config)
         self.client = Minio(
             endpoint=f"{config.hostname}:{config.port}",
             access_key=config.access_key,

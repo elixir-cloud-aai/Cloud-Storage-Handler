@@ -4,11 +4,6 @@ from http import HTTPStatus
 
 from werkzeug.exceptions import BadRequest, InternalServerError, NotFound
 
-
-class ConfigNotFoundError(FileNotFoundError):
-    """Configuration file not found error."""
-
-
 exceptions = {
     Exception: {
         "message": "An unexpected error occurred. Please try again.",
