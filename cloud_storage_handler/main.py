@@ -28,7 +28,6 @@ def init_app() -> FlaskApp:
     """
     # Determine the configuration path
     if config_path_env := os.getenv("CSH_FOCA_CONFIG_PATH"):
-        print(config_path_env)
         config_path = Path(config_path_env).resolve()
     else:
         config_path = (

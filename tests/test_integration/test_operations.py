@@ -8,7 +8,6 @@ import requests
 
 def test_get_root():
     """Test the root endpoint of the service with a mocked response."""
-    print("Starting test_get_root...")
 
     server_url = "http://localhost:8080/elixircoud/csh/v1"
 
@@ -25,5 +24,3 @@ def test_get_root():
         ), f"Expected status code 200, got {response.status_code}"
 
         mock_get.assert_called_once_with(server_url)
-
-    print("Finished test_get_root")
