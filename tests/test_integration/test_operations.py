@@ -8,7 +8,6 @@ import requests
 
 def test_get_root():
     """Test the root endpoint of the service with a mocked response."""
-
     server_url = "http://localhost:8080/elixircoud/csh/v1"
 
     with mock.patch("requests.get") as mock_get:

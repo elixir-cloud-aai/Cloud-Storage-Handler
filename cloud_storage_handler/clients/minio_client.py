@@ -5,7 +5,6 @@ import logging
 from foca import Foca
 from minio import Minio
 
-from cloud_storage_handler.api.elixircloud.csh.constants import CshConstants
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
 from cloud_storage_handler.utils import get_config_path
 
@@ -39,7 +38,7 @@ class MinioConfigurationData:
             secret_key=minio_config["secret_key"],
             bucket_name=minio_config["bucket_name"],
         )
-        
+
 
 class MinioClient:
     """A class to manage MinIO client configuration and bucket creation."""

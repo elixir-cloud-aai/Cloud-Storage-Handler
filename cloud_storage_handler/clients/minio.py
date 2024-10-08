@@ -15,7 +15,9 @@ def get_minio_client():
     """
     init_client = MinioClient()
     client = init_client.get_client()
-    init_client.create_bucket()
+    minio = MinioClient()
+    minio_client = minio.client
+    minio_client.create_bucket()
     return client
 
 
