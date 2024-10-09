@@ -1,23 +1,8 @@
-"""Constants."""
+"""CSH scoped constants."""
 
 from pydantic import BaseModel
 
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
-
-
-class MinioConstants(BaseModel):
-    """All the constants related to MinIO for CSH."""
-
-    hostname: str = "localhost"
-    port: int = 9000
-    access_key: str = "minioadmin"
-    secret_key: str = "minioadmin"
-    bucket_name: str = "files"
-
-    class Config:
-        """Configuration for MinioConstants class."""
-
-        frozen = True
 
 
 class CshConstants(BaseModel):
@@ -29,20 +14,19 @@ class CshConstants(BaseModel):
     """
 
     foca_config_path: str = "CSH_FOCA_CONFIG_PATH"
-    minio_constants: MinioConstants = MinioConstants()
+    default_minio_config: MinioConfig = MinioConfig(
+        hostname="localhost",
+        port=9000,
+        access_key="minioadmin",
+        secret_key="minioadmin",
+        bucket_name="files",
+        secure=False,
+    )
 
     class Config:
         """Configuration for CshConstants class."""
 
         frozen = True
 
-    def get_minio_config(self) -> MinioConfig:
-        """Return MinIO configuration as a Pydantic model."""
-        minio_config = self.minio_constants
-        return MinioConfig(
-            hostname=minio_config.hostname,
-            port=minio_config.port,
-            access_key=minio_config.access_key,
-            secret_key=minio_config.secret_key,
-            bucket_name=minio_config.bucket_name,
-        )
+
+chs_constants = CshConstants()

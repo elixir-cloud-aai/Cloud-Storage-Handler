@@ -5,7 +5,9 @@ import logging
 from foca import Foca
 from minio import Minio
 
+from cloud_storage_handler.api.elixircloud.csh.constants import chs_constants
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
+from cloud_storage_handler.custom_config import CustomConfig
 from cloud_storage_handler.utils import get_config_path
 
 logger = logging.getLogger(__name__)
@@ -22,7 +24,7 @@ class MinioConfigurationData:
                                uses the default path.
         """
         config_file = config_file or get_config_path()
-        self.config = Foca(config_file=config_file).conf
+        self.config: CustomConfig = Foca(config_file=config_file).conf
 
     def get_minio_config(self) -> MinioConfig:
         """Retrieve the MinIO configuration.
@@ -30,13 +32,36 @@ class MinioConfigurationData:
         Returns:
             A dictionary containing the MinIO configuration.
         """
-        minio_config = self.config.custom.get("minio")
+        minio_from_foca_config = self.config.minio
         return MinioConfig(
-            hostname=minio_config["hostname"],
-            port=minio_config["port"],
-            access_key=minio_config["access_key"],
-            secret_key=minio_config["secret_key"],
-            bucket_name=minio_config["bucket_name"],
+            hostname=getattr(
+                minio_from_foca_config,
+                "hostname",
+                chs_constants.default_minio_config.hostname,
+            ),
+            port=getattr(
+                minio_from_foca_config, "port", chs_constants.default_minio_config.port
+            ),
+            access_key=getattr(
+                minio_from_foca_config,
+                "access_key",
+                chs_constants.default_minio_config.access_key,
+            ),
+            secret_key=getattr(
+                minio_from_foca_config,
+                "secret_key",
+                chs_constants.default_minio_config.secret_key,
+            ),
+            bucket_name=getattr(
+                minio_from_foca_config,
+                "bucket_name",
+                chs_constants.default_minio_config.bucket_name,
+            ),
+            secure=getattr(
+                minio_from_foca_config,
+                "secure",
+                chs_constants.default_minio_config.secure,
+            ),
         )
 
 
@@ -50,7 +75,7 @@ class MinioClient:
             endpoint=f"{config.hostname}:{config.port}",
             access_key=config.access_key,
             secret_key=config.secret_key,
-            secure=False,
+            secure=config.secure,
         )
         self.bucket_name = config.bucket_name
 

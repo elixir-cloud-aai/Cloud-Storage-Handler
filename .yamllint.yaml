@@ -6,6 +6,9 @@ rules:
   truthy:
     ignore:
       .github/**/*.yaml
+  line-length:
+    ignore:
+      - deployment/config.yaml
   document-start:
     level: error
   document-end:

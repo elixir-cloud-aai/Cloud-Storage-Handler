@@ -1,6 +1,6 @@
 """Model for MinIO Configuration."""
 
-from typing import Annotated
+from typing import Annotated, Optional
 
 from pydantic import BaseModel, conint, constr
 
@@ -30,8 +30,9 @@ class MinioConfig(BaseModel):
         )
     """
 
-    hostname: str = "localhost"
-    port: Annotated[int, conint(ge=1, le=65535)] = 9000
-    access_key: str = "minioadmin"
-    secret_key: str = "minioadmin"
-    bucket_name: Annotated[str, constr(min_length=1)] = "files"
+    hostname: Optional[str]
+    port: Optional[Annotated[int, conint(ge=1, le=65535)]]
+    access_key: Optional[str]
+    secret_key: Optional[str]
+    bucket_name: Optional[Annotated[str, constr(min_length=1)]]
+    secure: Optional[bool] = False
