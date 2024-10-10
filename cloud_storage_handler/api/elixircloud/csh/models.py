@@ -9,16 +9,16 @@ class MinioConfig(BaseModel):
     """Configuration for MinIO.
 
     Attributes:
-        hostname : The hostname where the MinIO server is running.
-                        Defaults to 'localhost'.
-        port (int): The port on which the MinIO server is running.
-                        Must be between 1 and 65535. Defaults to 9000.
-        access_key (str): The access key used for authentication with MinIO.
-                            Defaults to 'minioadmin'.
-        secret_key (str): The secret key used for authentication with MinIO.
-                            Defaults to 'minioadmin'.
-        bucket_name (str): The name of the bucket where files are stored.
-                                Must be at least 1 character long. Defaults to 'files'.
+        hostname: The hostname where the MinIO server is running.
+            Defaults to 'localhost'.
+        port: The port on which the MinIO server is running.
+            Must be between 1 and 65535. Defaults to 9000.
+        access_key: The access key used for authentication with MinIO.
+            Defaults to 'minioadmin'.
+        secret_key: The secret key used for authentication with MinIO.
+            Defaults to 'minioadmin'.
+        bucket_name: The name of the bucket where files are stored.
+            Must be at least 1 character long. Defaults to 'files'.
 
     Examples:
         MinioConfig(

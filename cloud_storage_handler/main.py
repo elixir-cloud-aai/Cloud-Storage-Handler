@@ -2,13 +2,16 @@
 
 import logging
 import os
+import sys
 from pathlib import Path
 
 from connexion import FlaskApp
 from foca import Foca
 from minio import Minio
+from pydantic import ValidationError
 
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
+from cloud_storage_handler.custom_config import CustomConfig
 
 logger = logging.getLogger(__name__)
 
@@ -32,8 +35,13 @@ def init_app() -> tuple[FlaskApp, MinioConfig]:
         custom_config_model="cloud_storage_handler.custom_config.CustomConfig",
     )
     foca_config = foca.conf
-    minio_config = foca_config.custom.minio
-    logger.info(minio_config)
+    try:
+        custom_config_data = foca_config.custom.dict()
+        custom_config = CustomConfig(**custom_config_data)
+    except ValidationError as e:
+        logger.error(f"Error parsing custom configuration: {e}")
+        raise
+    minio_config = custom_config.minio
 
     # Create the Connexion FlaskApp instance
     return foca.create_app(), minio_config
@@ -41,11 +49,12 @@ def init_app() -> tuple[FlaskApp, MinioConfig]:
 
 def main() -> None:
     """Run FOCA application."""
-    app, minio_config = init_app()
+    try:
+        app, minio_config = init_app()
+    except Exception as e:
+        logger.error(f"Unexpected error during initialization: {e}")
+        sys.exit(1)
     foca_app = app.app
-
-    if minio_config is None:
-        raise KeyError("Custom configuration for MinIO not found in Flask app config.")
 
     # Initialize MinIO client
     try:

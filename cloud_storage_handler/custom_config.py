@@ -9,7 +9,6 @@ class CustomConfig(BaseModel):
     """Custom configuration model for the FOCA app.
 
     Attributes:
-        minio (MinioConfig): Configuration for MinIO, including bucket details
         and access credentials.
     """
 
