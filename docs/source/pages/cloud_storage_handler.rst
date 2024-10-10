@@ -36,14 +36,6 @@ cloud\_storage\_handler.main module
    :undoc-members:
    :show-inheritance:
 
-cloud\_storage\_handler.utils module
-------------------------------------
-
-.. automodule:: cloud_storage_handler.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 
