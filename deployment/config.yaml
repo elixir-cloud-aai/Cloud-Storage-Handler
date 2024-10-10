@@ -1,42 +1,48 @@
 ---
 server:
-    host: '0.0.0.0'
-    port: 8080
-    debug: false
-    environment: development
-    testing: false
-    use_reloader: true
+  host: '0.0.0.0'
+  port: 8080
+  debug: false
+  environment: development
+  testing: false
+  use_reloader: true
 
 security:
-    auth:
-        required: true
-        add_key_to_claims: true
-        allow_expired: false
-        audience: null
-        claim_identity: sub
-        claim_issuer: iss
-        algorithms:
-            - RS256
-        validation_methods:
-            - userinfo
-            - public_key
-        validation_checks: all
+  auth:
+    required: true
+    add_key_to_claims: true
+    allow_expired: false
+    audience: null
+    claim_identity: sub
+    claim_issuer: iss
+    algorithms:
+      - RS256
+    validation_methods:
+      - userinfo
+      - public_key
+    validation_checks: all
 
 api:
-    specs:
-        - path: cloud_storage_handler/api/specs/specs.yaml
-          append: null
-          add_operation_fields:
-              x-openapi-router-controller: cloud_storage_handler.api.elixircloud.csh.controllers
-          connexion:
-              strict_validation: true
-              validate_responses: false
-              options:
-                  swagger_ui: true
-                  serve_spec: true
+  specs:
+    - path: cloud_storage_handler/api/specs/specs.yaml
+      append: null
+      add_operation_fields:
+        x-openapi-router-controller: cloud_storage_handler.api.elixircloud.csh.controllers
+      connexion:
+        strict_validation: true
+        validate_responses: false
+
+custom:
+  minio:
+    hostname: localhost
+    port: 9000
+    access_key: minioadmin
+    secret_key: minioadmin
+    bucket_name: 'files'
+    secure: false
 
 exceptions:
-    required_members: [['message'], ['code']]
-    status_member: ['code']
-    exceptions: cloud_storage_handler.exceptions.exceptions
+  required_members: [['message'], ['code']]
+  status_member: ['code']
+  exceptions: cloud_storage_handler.exceptions.exceptions
 ...
