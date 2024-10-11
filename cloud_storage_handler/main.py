@@ -19,7 +19,7 @@ def init_app() -> FlaskApp:
     the default path if not.
 
     Returns:
-        A Connexion application instance.
+        A Connexion Flask application instance.
     """
     config_path = Path(
         os.getenv(

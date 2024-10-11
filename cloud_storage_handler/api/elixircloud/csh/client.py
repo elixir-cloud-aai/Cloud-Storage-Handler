@@ -1,7 +1,6 @@
 """MinIO client class and convenience functions."""
 
 import logging
-from typing import Type
 
 from connexion import FlaskApp
 from minio import Minio
@@ -28,7 +27,7 @@ class MinioClient:
             config: MinIO configuration.
         """
         self.config: MinioConfig = config
-        self.client: Type[Minio] = Minio(
+        self.client: Minio = Minio(
             endpoint=f"{config.hostname}:{config.port}",
             access_key=config.access_key,
             secret_key=config.secret_key,
@@ -48,14 +47,14 @@ def register_minio_client(app: FlaskApp) -> FlaskApp:
     """Register MinIO client and create bucket.
 
     Args:
-        app: FOCA app instance.
+        app: Connexion Flask app instance.
 
     Returns:
-        FOCA app instance with MinIO client instance added to config.
+        Connexion Flask app instance with a MinIO client instance added to
+            its config.
     """
-    minio_config = app.app.config.foca.custom.minio
-    minio_client = MinioClient(config=minio_config)
+    minio_client = MinioClient(config=app.app.config.foca.custom.minio)
     minio_client.create_bucket()
-    minio_config.client = minio_client
+    app.app.config.foca.custom.minio.client = minio_client
     logger.info("MinIO client registered.")
     return app

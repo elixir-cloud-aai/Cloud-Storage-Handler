@@ -1,6 +1,6 @@
 """Model for MinIO Configuration."""
 
-from typing import Annotated, Optional, Type
+from typing import Annotated, Optional
 
 from minio import Minio
 from pydantic import BaseModel, conint, constr
@@ -37,4 +37,9 @@ class MinioConfig(BaseModel):
     secret_key: str = "minioadmin"
     bucket_name: Annotated[str, constr(min_length=1)] = "files"
     secure: bool = False
-    client: Optional[Type[Minio]] = None
+    client: Optional[Minio] = None
+
+    class Config:
+        """Model configuration."""
+
+        arbitrary_types_allowed = True
