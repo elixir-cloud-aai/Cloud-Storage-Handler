@@ -9,7 +9,7 @@ class CustomConfig(BaseModel):
     """Custom configuration model for the FOCA app.
 
     Attributes:
-        and access credentials.
+        minio: MinIO configuration parameters.
     """
 
     minio: MinioConfig
