@@ -8,17 +8,14 @@ from pydantic import BaseModel, conint, constr
 class MinioConfig(BaseModel):
     """Configuration for MinIO.
 
-    Attributes:
-        hostname: The hostname where the MinIO server is running.
-            Defaults to 'localhost'.
-        port: The port on which the MinIO server is running.
-            Must be between 1 and 65535. Defaults to 9000.
+    Attributes:  
+        hostname: The name of the host where the MinIO server is running.
+        port: The port on which the MinIO server is running. Must be between 1
+            and 65535.
         access_key: The access key used for authentication with MinIO.
-            Defaults to 'minioadmin'.
         secret_key: The secret key used for authentication with MinIO.
-            Defaults to 'minioadmin'.
-        bucket_name: The name of the bucket where files are stored.
-            Must be at least 1 character long. Defaults to 'files'.
+        bucket_name: The name of the bucket where files are stored. Must be at
+            least 1 character long.
 
     Examples:
         MinioConfig(
