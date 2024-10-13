@@ -92,7 +92,7 @@ jobs:
           poetry run pytest \
             --cov-report term \
             --cov-report xml:test_minio.xml \
-            --cov=tests/test_minio
+            --cov=tests/test_integration/test_minio
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
