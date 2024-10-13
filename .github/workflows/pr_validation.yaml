@@ -33,6 +33,9 @@ jobs:
           poetry-install-options: "--only=misc --no-root"
           poetry-export-options: "--only=misc"
 
+      - name: Install dependencies
+        run: poetry install --with code_quality
+
       - name: Check all the pre-commit hooks passed
         run: pre-commit run --all-files --exclude deployment/config.yaml
 
