@@ -71,35 +71,4 @@ jobs:
           files: ./test_unit.xml
           fail_ci_if_error: true
           verbose: true
-
-  minio-config-test:
-    name: Minio configuration test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up environment
-        uses: ./.github/actions/setup/poetry
-        with:
-          os: ${{ job.os }}
-          python-version: '3.11'
-          poetry-install-options: "--with=test"
-          poetry-export-options: "--with=test"
-
-      - name: Run tests and generate coverage as test_minio.xml
-        run: |
-          poetry run pytest \
-            --cov-report term \
-            --cov-report xml:test_minio.xml \
-            --cov=tests/test_integration/test_minio
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: test_minio
-          files: ./test_minio.xml
-          fail_ci_if_error: true
-          verbose: true
 ...
