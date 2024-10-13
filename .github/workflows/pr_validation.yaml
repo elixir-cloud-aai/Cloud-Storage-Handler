@@ -33,13 +33,13 @@ jobs:
           poetry-install-options: "--only=misc --no-root"
           poetry-export-options: "--only=misc"
 
-      - name: Install dependencies
-        run: |
-          poetry add pre-commit
-          poetry run pre-commit install
+      - name: Install pre-commit
+        run: pip install pre-commit
 
-      - name: Check all the pre-commit hooks passed
-        run: pre-commit run --all-files --exclude deployment/config.yaml
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: "--exclude deployment/config.yaml"
 
   semantic-pr:
     name: Semantic PR title
