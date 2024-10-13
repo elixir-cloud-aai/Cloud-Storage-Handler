@@ -1,11 +1,12 @@
 """Integration tests for the minio configuration."""
 
-import pytest
 from minio import Minio
-from pydantic import ValidationError
+
 from cloud_storage_handler.api.elixircloud.csh.models import MinioConfig
 
+
 def test_create_minio_client():
+    """Check if the minio client is created."""
     config = MinioConfig()
     client = Minio(
         endpoint=f"{config.hostname}:{config.port}",
