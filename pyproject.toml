@@ -41,6 +41,7 @@ optional = true
 
 [tool.poetry.group.code_quality.dependencies]
 mypy = ">=1.10.0"
+pre-commit = ">3.0.1"
 ruff = ">=0.4.10"
 typos = ">=1.22.8"
 
