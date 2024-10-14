@@ -3,10 +3,8 @@
 import logging
 from http import HTTPStatus
 
-from flask import jsonify
+from flask import current_app, jsonify
 from minio.error import S3Error
-
-from cloud_storage_handler.clients.minio import get_minio_client
 
 logger = logging.getLogger(__name__)
 
@@ -21,8 +19,10 @@ def home():
 def list_files():
     """Endpoint to list all files in the MinIO bucket."""
     try:
-        minio_client = get_minio_client()
-        objects = minio_client.list_objects("files")
+        minio_config = current_app.config.foca.custom.minio
+        bucket_name = minio_config.bucket_name
+        minio_client = current_app.config.foca.custom.minio.client.client
+        objects = minio_client.list_objects(bucket_name)
         files = [obj.object_name for obj in objects]
         return jsonify({"files": files}), 200
 

@@ -38,7 +38,7 @@ paths:
   /list_files:
     get:
       description: |
-        Returns a list of all files in the minio storage
+        Returns a list of all files in the minio bucket
       operationId: list_files
       responses:
         '200':
