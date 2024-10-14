@@ -12,6 +12,14 @@ Subpackages
 Submodules
 ----------
 
+cloud\_storage\_handler.custom\_config module
+---------------------------------------------
+
+.. automodule:: cloud_storage_handler.custom_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 cloud\_storage\_handler.exceptions module
 -----------------------------------------
 

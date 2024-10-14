@@ -10,7 +10,7 @@ jobs:
   detect-unresolved-conflicts:
     name: Detect unresolved merge conflicts
     runs-on: ubuntu-latest
-    needs: semantic_pr
+    needs: semantic-pr
     steps:
       - uses: actions/checkout@v3
       - name: List files with merge conflict markers
@@ -33,8 +33,13 @@ jobs:
           poetry-install-options: "--only=misc --no-root"
           poetry-export-options: "--only=misc"
 
-      - name: Check all the pre-commit hooks passed
-        run: pre-commit run --all-files
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+        with:
+          config: ../../.pre-commit-config.yaml
 
   semantic-pr:
     name: Semantic PR title
