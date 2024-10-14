@@ -1,13 +1,14 @@
 """API server entry point."""
 
-import logging
 import os
 from pathlib import Path
 
 from connexion import FlaskApp
 from foca import Foca
 
-logger = logging.getLogger(__name__)
+from cloud_storage_handler.api.elixircloud.csh.client import (
+    register_minio_client,
+)
 
 
 def init_app() -> FlaskApp:
@@ -15,30 +16,21 @@ def init_app() -> FlaskApp:
 
     This function initializes the FOCA app by loading the configuration
     from the environment variable `CSH_FOCA_CONFIG_PATH` if set, or from
-    the default path if not. It raises a `FileNotFoundError` if the
-    configuration file is not found.
+    the default path if not.
 
     Returns:
-        A Connexion application instance.
-
-    Raises:
-        FileNotFoundError: If the configuration file is not found.
+        A Connexion Flask application instance.
     """
-    # Determine the configuration path
-    if config_path_env := os.getenv("CSH_FOCA_CONFIG_PATH"):
-        print(config_path_env)
-        config_path = Path(config_path_env).resolve()
-    else:
-        config_path = (
-            Path(__file__).parents[1] / "deployment" / "config.yaml"
-        ).resolve()
-
-    # Check if the configuration file exists
-    if not config_path.exists():
-        raise FileNotFoundError(f"Config file not found at: {config_path}")
+    config_path = Path(
+        os.getenv(
+            "CSH_FOCA_CONFIG_PATH",
+            Path(__file__).parents[1] / "deployment" / "config.yaml",
+        )
+    ).resolve()
 
     foca = Foca(
         config_file=config_path,
+        custom_config_model="cloud_storage_handler.custom_config.CustomConfig",
     )
     return foca.create_app()
 
@@ -46,6 +38,7 @@ def init_app() -> FlaskApp:
 def main() -> None:
     """Run FOCA application."""
     app = init_app()
+    app = register_minio_client(app)
     app.run(port=app.port)
 
 

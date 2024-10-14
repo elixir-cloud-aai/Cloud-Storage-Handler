@@ -32,6 +32,7 @@ version = "0.1.0"
 [tool.poetry.dependencies]
 flask = "2.2.3"
 foca = "^0.13.0"
+minio = "^7.2.9"
 python = ">=3.11,<4.0"
 sphinx = "^8.0.2"
 
@@ -40,6 +41,7 @@ optional = true
 
 [tool.poetry.group.code_quality.dependencies]
 mypy = ">=1.10.0"
+pre-commit = ">3.0.1"
 ruff = ">=0.4.10"
 typos = ">=1.22.8"
 
