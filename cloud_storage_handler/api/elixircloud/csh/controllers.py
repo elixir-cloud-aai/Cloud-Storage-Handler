@@ -10,7 +10,6 @@ from minio.error import S3Error
 
 logger = logging.getLogger(__name__)
 
-UPLOAD_DIRECTORY = "/tmp/upload"
 CHUNK_SIZE = 5 * 1024 * 1024
 
 
@@ -20,6 +19,14 @@ def home():
         {"message": "Welcome to the Cloud Storage Handler server!"}
     ), HTTPStatus.OK
 
+
+def get_chunks(file_obj, chunk_size):
+    """Generate chunks from a file object."""
+    while True:
+        chunk = file_obj.read(chunk_size)
+        if not chunk:
+            break
+        yield chunk
 
 def upload_object():
     """Handles file uploads to cloud storage.
@@ -33,45 +40,57 @@ def upload_object():
     minio_config = current_app.config.foca.custom.minio
     bucket_name = minio_config.bucket_name
     minio_client = current_app.config.foca.custom.minio.client.client
+    upload_dir = "/tmp/upload"
+
+    os.makedirs(upload_dir, exist_ok=True)
 
     for file in files:
         if not file:
-            return jsonify({"error": "No file provided"}), 400
+            return jsonify({"error": "No file provided"}), HTTPStatus.BAD_REQUEST
 
         file_id = str(uuid.uuid4())
-        file_path = os.path.join(UPLOAD_DIRECTORY, f"{file_id}.temp")
+        file_path = os.path.join(upload_dir, f"{file_id}.temp")
 
-        file.save(file_path)
+        with open(file_path, "wb") as f:
+            file.save(f)
 
         total_size = os.path.getsize(file_path)
         total_chunks = (total_size // CHUNK_SIZE) + (
             1 if total_size % CHUNK_SIZE > 0 else 0
         )
 
-        file_dir = os.path.join(UPLOAD_DIRECTORY, file_id)
-        os.makedirs(file_dir, exist_ok=True)
+        try:
+            # Stream the file to disk in chunks for better performance with large files
+            with open(file_path, "wb") as dest:
+                for chunk in file.stream:
+                    dest.write(chunk)
 
-        with open(file_path, "rb") as f:
-            for i in range(total_chunks):
-                chunk_data = f.read(CHUNK_SIZE)
-                chunk_filename = os.path.join(file_dir, f"chunk_{i}")
-                with open(chunk_filename, "wb") as chunk_file:
-                    chunk_file.write(chunk_data)
+            total_size = os.path.getsize(file_path)
+            total_chunks = (total_size // CHUNK_SIZE) + (
+                1 if total_size % CHUNK_SIZE > 0 else 0
+            )
 
-                try:
-                    minio_client.fput_object(
-                        bucket_name,
-                        f"{file_id}/chunk_{i}",
-                        chunk_filename,
-                        metadata={
-                            "description": "Chunk upload via Flask",
-                        },
-                    )
-                except S3Error as e:
-                    return jsonify({"error": str(e)}), 500
-
-        os.remove(file_path)
-        os.rmdir(file_dir)
+            # Stream each chunk to Minio for upload
+            with open(file_path, "rb") as f:
+                for i, chunk in enumerate(get_chunks(f, CHUNK_SIZE)):
+                    try:
+                        minio_client.put_object(
+                            bucket_name,
+                            f"{file_id}/chunk_{i}",
+                            chunk,
+                            len(chunk),
+                            metadata={"description": "Chunk upload via Flask"},
+                        )
+                    except S3Error as e:
+                        logger.error(f"Failed to upload chunk {i} for file {file_id}: {str(e)}")
+                        return jsonify({"error": "Failed to upload file to cloud storage"}), HTTPStatus.INTERNAL_SERVER_ERROR
+        except Exception as e:
+            logger.error(f"Error processing file {file.filename}: {str(e)}")
+            return jsonify({"error": "An error occurred while processing the file"}), HTTPStatus.INTERNAL_SERVER_ERROR
+        finally:
+            # Cleanup temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
 
         responses.append(
             {
@@ -81,4 +100,4 @@ def upload_object():
             }
         )
 
-    return jsonify(responses), 200
+    return jsonify(responses), HTTPStatus.OK
