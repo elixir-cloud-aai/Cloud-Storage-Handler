@@ -35,4 +35,36 @@ paths:
           description: The request is malformed.
         '500':
           description: An unexpected error occurred.
+  /object:
+    post:
+      description: |
+        Create a new object upload using the TUS protocol. The request creates an empty object and returns an upload URL.
+      operationId: upload_object
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded (supports .bib, .txt, .docx, and other file types).
+      responses:
+        '201':
+          description: Object upload created successfully.
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL to upload object chunks using PATCH requests.
+            Tus-Resumable:
+              schema:
+                type: string
+              description: Version of the TUS protocol used.
+        '400':
+          description: Bad request or malformed request body.
+        '500':
+          description: An unexpected error occurred.
 ...
