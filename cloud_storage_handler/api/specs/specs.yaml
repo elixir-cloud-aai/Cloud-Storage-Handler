@@ -35,4 +35,72 @@ paths:
           description: The request is malformed.
         '500':
           description: An unexpected error occurred.
+  /upload/initiate:
+    post:
+      summary: Initiate TUS upload session
+      operationId: initiate_upload
+      tags:
+        - Upload
+      responses:
+        "201":
+          description: TUS upload session initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object_id:
+                    type: string
+                    description: Unique identifier for the upload session
+  /upload/{object_id}/chunk:
+    patch:
+      summary: Upload a file chunk
+      operationId: upload_chunk
+      tags:
+        - Upload
+      parameters:
+        - in: path
+          name: object_id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier for the upload session
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "204":
+          description: Chunk uploaded successfully
+        "404":
+          description: File not found
+  /upload/complete/{object_id}:
+    post:
+      summary: Complete upload and store in MinIO
+      operationId: complete_upload
+      tags:
+        - Upload
+      parameters:
+        - in: path
+          name: object_id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier for the upload session
+      responses:
+        "200":
+          description: Upload complete and file stored in MinIO
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Confirmation message
+        "404":
+          description: File not found
 ...

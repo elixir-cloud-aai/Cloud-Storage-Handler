@@ -21,6 +21,8 @@ security:
       - userinfo
       - public_key
     validation_checks: all
+  cors:
+    enabled: True
 
 api:
   specs:
