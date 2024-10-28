@@ -18,21 +18,7 @@ def home():
         {"message": "Welcome to the Cloud Storage Handler server!"}
     ), HTTPStatus.OK
 
-
-app = Flask(__name__)
-
-app.config["TUS_UPLOAD_DIR"] = "/tmp/tus_uploads"
-app.config["TUS_CHUNK_SIZE"] = 8 * 1024
-
-
-def get_chunks(object, chunk_size):
-    """Generator to yield chunks from object."""
-    while True:
-        chunk = object.read(chunk_size)
-        if not chunk:
-            break
-        yield chunk
-
+TUS_UPLOAD_DIR = "/tmp/tus_uploads"
 
 def compute_file_hash(file_path):
     """Compute MD5 hash of the file."""
@@ -46,8 +32,8 @@ def compute_file_hash(file_path):
 def initiate_upload():
     """Initiate TUS upload, creates object and returns object_id."""
     object_id = str(uuid.uuid4())
-    object_path = os.path.join(app.config["TUS_UPLOAD_DIR"], f"{object_id}.temp")
-    os.makedirs(app.config["TUS_UPLOAD_DIR"], exist_ok=True)
+    object_path = os.path.join(TUS_UPLOAD_DIR, f"{object_id}.temp")
+    os.makedirs(TUS_UPLOAD_DIR, exist_ok=True)
 
     open(object_path, "wb").close()
 
@@ -66,7 +52,7 @@ def upload_chunk(object_id):
             "Access-Control-Allow-Headers", "Content-Type,Authorization"
         )
 
-    object_path = os.path.join(app.config["TUS_UPLOAD_DIR"], f"{object_id}.temp")
+    object_path = os.path.join(TUS_UPLOAD_DIR, f"{object_id}.temp")
     if not os.path.exists(object_path):
         return jsonify({"error": "object not found"}), HTTPStatus.NOT_FOUND
 
@@ -90,7 +76,7 @@ def complete_upload(object_id):
     minio_config = current_app.config.foca.custom.minio
     bucket_name = minio_config.bucket_name
     minio_client = current_app.config.foca.custom.minio.client.client
-    object_path = os.path.join(app.config["TUS_UPLOAD_DIR"], f"{object_id}.temp")
+    object_path = os.path.join(TUS_UPLOAD_DIR, f"{object_id}.temp")
 
     if not os.path.exists(object_path):
         return jsonify({"error": "object not found"}), HTTPStatus.NOT_FOUND
