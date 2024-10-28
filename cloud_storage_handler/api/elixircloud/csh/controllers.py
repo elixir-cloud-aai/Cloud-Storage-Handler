@@ -3,6 +3,7 @@
 import hashlib
 import logging
 import os
+import tempfile
 import uuid
 from http import HTTPStatus
 
@@ -10,6 +11,8 @@ from flask import current_app, jsonify, request
 from minio import S3Error
 
 logger = logging.getLogger(__name__)
+
+TUS_UPLOAD_DIR = tempfile.gettempdir()
 
 
 def home():
@@ -19,16 +22,13 @@ def home():
     ), HTTPStatus.OK
 
 
-TUS_UPLOAD_DIR = "/tmp/tus_uploads"
-
-
 def compute_file_hash(file_path):
-    """Compute MD5 hash of the file."""
-    hash_md5 = hashlib.md5()
+    """Compute SHA-256 hash of the file."""
+    hash_sha256 = hashlib.sha256()
     with open(file_path, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+            hash_sha256.update(chunk)
+    return hash_sha256.hexdigest()
 
 
 def initiate_upload():
