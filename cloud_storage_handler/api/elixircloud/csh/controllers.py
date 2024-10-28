@@ -6,7 +6,7 @@ import os
 import uuid
 from http import HTTPStatus
 
-from flask import Flask, current_app, jsonify, request
+from flask import current_app, jsonify, request
 from minio import S3Error
 
 logger = logging.getLogger(__name__)
@@ -18,7 +18,9 @@ def home():
         {"message": "Welcome to the Cloud Storage Handler server!"}
     ), HTTPStatus.OK
 
+
 TUS_UPLOAD_DIR = "/tmp/tus_uploads"
+
 
 def compute_file_hash(file_path):
     """Compute MD5 hash of the file."""
