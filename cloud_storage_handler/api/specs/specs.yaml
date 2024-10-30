@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   version: 1.0.0
   title: Cloud Storage Handler
-  description: API for handling files on a cloud storage service
+  description: API for handling objects on a cloud storage service
   contact:
     name: ELIXIR Cloud & AAI
     email: cloud-service@elixir-europe.org
@@ -13,94 +13,83 @@ info:
       https://github.com/elixir-cloud-aai/
       cloud-storage-handler/blob/main/LICENSE
 servers:
-  - url: /elixircoud/csh/v1
+  - url: /elixircloud/csh/v1
 paths:
-  /:
-    get:
-      description: |
-        Returns a welcome message
-      operationId: home
-      responses:
-        '200':
-          description: basic response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Welcome to Cloud Storage Handler API"
-        '400':
-          description: The request is malformed.
-        '500':
-          description: An unexpected error occurred.
-  /upload/initiate:
+  /object:
     post:
-      summary: Initiate TUS upload session
-      operationId: initiate_upload
-      tags:
-        - Upload
-      responses:
-        "201":
-          description: TUS upload session initiated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  object_id:
-                    type: string
-                    description: Unique identifier for the upload session
-  /upload/{object_id}/chunk:
-    patch:
-      summary: Upload a file chunk
-      operationId: upload_chunk
-      tags:
-        - Upload
-      parameters:
-        - in: path
-          name: object_id
-          required: true
-          schema:
-            type: string
-          description: Unique identifier for the upload session
+      operationId: upload_object
+      summary: Upload a object
       requestBody:
-        required: true
         content:
           application/octet-stream:
             schema:
               type: string
               format: binary
       responses:
-        "204":
-          description: Chunk uploaded successfully
-        "404":
-          description: File not found
-  /upload/complete/{object_id}:
-    post:
-      summary: Complete upload and store in MinIO
-      operationId: complete_upload
-      tags:
-        - Upload
+        '201':
+          description: object uploaded successfully
+        '400':
+          description: Bad request
+        '409':
+          description: Conflict - object already exists
+        '500':
+          description: Internal server error
+  /object/{resourceId}:
+    head:
+      operationId: object_upload_chunk_head
+      summary: Check upload status of a object
       parameters:
-        - in: path
-          name: object_id
+        - name: resourceId
+          in: path
           required: true
+          description: ID of the resource
           schema:
             type: string
-          description: Unique identifier for the upload session
       responses:
-        "200":
-          description: Upload complete and file stored in MinIO
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: Confirmation message
-        "404":
-          description: File not found
+        '200':
+          description: object exists and offset returned
+        '404':
+          description: object not found
+        '500':
+          description: Internal server error
+    patch:
+      operationId: object_upload_chunk_patch
+      summary: Upload a chunk of a object
+      parameters:
+        - name: resourceId
+          in: path
+          required: true
+          description: ID of the resource
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '204':
+          description: Chunk uploaded successfully
+        '404':
+          description: object not found
+        '500':
+          description: Internal server error
+    delete:
+      operationId: object_upload_chunk_delete
+      summary: Delete a object
+      parameters:
+        - name: resourceId
+          in: path
+          required: true
+          description: ID of the resource
+          schema:
+            type: string
+      responses:
+        '204':
+          description: object deleted successfully
+        '404':
+          description: object not found
+        '500':
+          description: Internal server error
 ...
