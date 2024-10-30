@@ -13,7 +13,7 @@ info:
       https://github.com/elixir-cloud-aai/
       cloud-storage-handler/blob/main/LICENSE
 servers:
-  - url: /elixircoud/csh/v1
+  - url: /elixircloud/csh/v1
 paths:
   /:
     get:
@@ -35,72 +35,109 @@ paths:
           description: The request is malformed.
         '500':
           description: An unexpected error occurred.
-  /upload/initiate:
-    post:
-      summary: Initiate TUS upload session
-      operationId: initiate_upload
-      tags:
-        - Upload
-      responses:
-        "201":
-          description: TUS upload session initiated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  object_id:
-                    type: string
-                    description: Unique identifier for the upload session
-  /upload/{object_id}/chunk:
-    patch:
-      summary: Upload a file chunk
-      operationId: upload_chunk
-      tags:
-        - Upload
-      parameters:
-        - in: path
-          name: object_id
-          required: true
-          schema:
-            type: string
-          description: Unique identifier for the upload session
-      requestBody:
-        required: true
-        content:
-          application/octet-stream:
-            schema:
-              type: string
-              format: binary
-      responses:
-        "204":
-          description: Chunk uploaded successfully
-        "404":
-          description: File not found
-  /upload/complete/{object_id}:
-    post:
-      summary: Complete upload and store in MinIO
-      operationId: complete_upload
-      tags:
-        - Upload
-      parameters:
-        - in: path
-          name: object_id
-          required: true
-          schema:
-            type: string
-          description: Unique identifier for the upload session
-      responses:
-        "200":
-          description: Upload complete and file stored in MinIO
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: Confirmation message
-        "404":
-          description: File not found
 ...
+  # /file-upload:
+  #   post:
+  #     operationId: tus_file_upload
+  #     summary: Upload a file
+  #     requestBody:
+  #       content:
+  #         application/octet-stream:
+  #           schema:
+  #             type: string
+  #             format: binary
+  #     responses:
+  #       '201':
+  #         description: File uploaded successfully
+  #       '400':
+  #         description: Bad request
+  #       '409':
+  #         description: Conflict - file already exists
+  #       '500':
+  #         description: Internal server error
+  #   get:
+  #     operationId: list_files
+  #     summary: List all files
+  #     responses:
+  #       '200':
+  #         description: List of files retrieved successfully
+  #       '500':
+  #         description: Internal server error
+
+  # /file-upload/{resourceId}:
+  #   head:
+  #     operationId: tus_file_upload_chunk
+  #     summary: Check upload status of a file
+  #     parameters:
+  #       - name: resourceId
+  #         in: path
+  #         required: true
+  #         description: ID of the resource
+  #         schema:
+  #           type: string
+  #     responses:
+  #       '200':
+  #         description: File exists and offset returned
+  #       '404':
+  #         description: File not found
+  #       '500':
+  #         description: Internal server error
+  #   patch:
+  #     operationId: tus_file_upload_chunk
+  #     summary: Upload a chunk of a file
+  #     parameters:
+  #       - name: resourceId
+  #         in: path
+  #         required: true
+  #         description: ID of the resource
+  #         schema:
+  #           type: string
+  #     requestBody:
+  #       content:
+  #         application/octet-stream:
+  #           schema:
+  #             type: string
+  #             format: binary
+  #     responses:
+  #       '204':
+  #         description: Chunk uploaded successfully
+  #       '404':
+  #         description: File not found
+  #       '500':
+  #         description: Internal server error
+  #   delete:
+  #     operationId: tus_file_upload_chunk
+  #     summary: Delete a file
+  #     parameters:
+  #       - name: resourceId
+  #         in: path
+  #         required: true
+  #         description: ID of the resource
+  #         schema:
+  #           type: string
+  #     responses:
+  #       '204':
+  #         description: File deleted successfully
+  #       '404':
+  #         description: File not found
+  #       '500':
+  #         description: Internal server error
+
+  # /file-upload/{resourceId}/download:
+  #   get:
+  #     operationId: tus_file_download
+  #     summary: Download a file
+  #     parameters:
+  #       - name: resourceId
+  #         in: path
+  #         required: true
+  #         description: ID of the resource
+  #         schema:
+  #           type: string
+  #     responses:
+  #       '200':
+  #         description: File downloaded successfully
+  #       '404':
+  #         description: File not found
+  #       '500':
+  #         description: Internal server error

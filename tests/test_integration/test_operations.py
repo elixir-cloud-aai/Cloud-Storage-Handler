@@ -10,7 +10,7 @@ def test_get_root():
     """Test the root endpoint of the service with a mocked response."""
     print("Starting test_get_root...")
 
-    server_url = "http://localhost:8080/elixircoud/csh/v1"
+    server_url = "http://localhost:8080/elixircloud/csh/v1"
 
     with mock.patch("requests.get") as mock_get:
         mock_response = mock.Mock()
