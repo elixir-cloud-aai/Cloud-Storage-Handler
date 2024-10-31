@@ -1,6 +1,14 @@
 cloud\_storage\_handler.api.elixircloud.csh package
 ===================================================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cloud_storage_handler.api.elixircloud.csh.tus
+
 Submodules
 ----------
 
