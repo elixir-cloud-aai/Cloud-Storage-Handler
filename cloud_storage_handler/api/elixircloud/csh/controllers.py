@@ -1,12 +1,14 @@
 """ELIXIR's Cloud Storage Handler controllers."""
 
 import logging
-from flask import current_app, Response
+
+from flask import Response, current_app
 from foca.utils.logging import log_traffic  # type: ignore
 
 from cloud_storage_handler.api.elixircloud.csh.tus.tus import TusController
 
 logger = logging.getLogger(__name__)
+
 
 @log_traffic
 def upload_object() -> Response:
