@@ -1,8 +1,7 @@
 """ELIXIR's Cloud Storage Handler controllers."""
 
 import logging
-
-from flask import Response, current_app
+from flask import current_app, Response
 from foca.utils.logging import log_traffic  # type: ignore
 
 from cloud_storage_handler.api.elixircloud.csh.tus.tus import TusController
@@ -20,9 +19,9 @@ def upload_object() -> Response:
     Returns:
         Response: The Flask response object containing the result of the upload.
     """
-    minio_config = current_app.config.foca.custom.minio
+    minio_config = current_app.config.foca.custom.minio  # type: ignore
     bucket_name = minio_config.bucket_name
-    minio_client = current_app.config.foca.custom.minio.client.client
+    minio_client = current_app.config.foca.custom.minio.client.client  # type: ignore
     tus = TusController(minio_client, bucket_name)
     return tus.tus_object_upload()
 
@@ -39,9 +38,9 @@ def object_upload_chunk_head(resourceId: str) -> Response:
     Returns:
         Response: The Flask response object containing the status of the upload.
     """
-    minio_config = current_app.config.foca.custom.minio
+    minio_config = current_app.config.foca.custom.minio  # type: ignore
     bucket_name = minio_config.bucket_name
-    minio_client = current_app.config.foca.custom.minio.client.client
+    minio_client = current_app.config.foca.custom.minio.client.client  # type: ignore
     tus = TusController(minio_client, bucket_name)
     return tus.tus_object_upload_chunk(resourceId)
 
@@ -58,9 +57,9 @@ def object_upload_chunk_patch(resourceId: str) -> Response:
     Returns:
         Response: The Flask response object containing the status of the upload.
     """
-    minio_config = current_app.config.foca.custom.minio
+    minio_config = current_app.config.foca.custom.minio  # type: ignore
     bucket_name = minio_config.bucket_name
-    minio_client = current_app.config.foca.custom.minio.client.client
+    minio_client = current_app.config.foca.custom.minio.client.client  # type: ignore
     tus = TusController(minio_client, bucket_name)
     return tus.tus_object_upload_chunk(resourceId)
 
@@ -77,8 +76,8 @@ def object_upload_chunk_delete(resourceId: str) -> Response:
     Returns:
         Response: The Flask response object confirming the deletion.
     """
-    minio_config = current_app.config.foca.custom.minio
+    minio_config = current_app.config.foca.custom.minio  # type: ignore
     bucket_name = minio_config.bucket_name
-    minio_client = current_app.config.foca.custom.minio.client.client
+    minio_client = current_app.config.foca.custom.minio.client.client  # type: ignore
     tus = TusController(minio_client, bucket_name)
     return tus.tus_object_upload_chunk(resourceId)
